@@ -5,6 +5,7 @@ import net.foxandr.sport.universiade.restapi.competitions.countries.CountriesEnt
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -19,13 +20,13 @@ public class GamesEntity {
     private String codeName;
 
     @Column(name = "game_year")
-    private short gameYear;
+    private Short gameYear;
 
     @Column(name = "is_summer")
-    private byte isSummer;
+    private Boolean isSummer;
     @JsonManagedReference
     @OneToMany(mappedBy = "gamesById")
-    private Collection<GamesTEntity> gamesTSById;
+    private List<GamesTEntity> gamesTSById;
 
 //    @ManyToOne
 //    @JoinColumn(name = "country_id")
@@ -47,19 +48,19 @@ public class GamesEntity {
         this.codeName = codeName;
     }
 
-    public short getGameYear() {
+    public Short getGameYear() {
         return gameYear;
     }
 
-    public void setGameYear(short gameYear) {
+    public void setGameYear(Short gameYear) {
         this.gameYear = gameYear;
     }
 
-    public byte getIsSummer() {
+    public Boolean getIsSummer() {
         return isSummer;
     }
 
-    public void setIsSummer(byte isSummer) {
+    public void setIsSummer(Boolean isSummer) {
         this.isSummer = isSummer;
     }
 
@@ -68,7 +69,7 @@ public class GamesEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         GamesEntity that = (GamesEntity) o;
-        return id.equals(that.id) && gameYear == that.gameYear && isSummer == that.isSummer && Objects.equals(codeName, that.codeName);
+        return id.equals(that.id) && gameYear.equals(that.gameYear) == that.isSummer && Objects.equals(codeName, that.codeName);
     }
 
     @Override
@@ -76,11 +77,11 @@ public class GamesEntity {
         return Objects.hash(id, codeName, gameYear, isSummer);
     }
 
-    public Collection<GamesTEntity> getGamesTSById() {
+    public List<GamesTEntity> getGamesTSById() {
         return gamesTSById;
     }
 
-    public void setGamesTSById(Collection<GamesTEntity> gamesTSById) {
+    public void setGamesTSById(List<GamesTEntity> gamesTSById) {
         this.gamesTSById = gamesTSById;
     }
 
@@ -91,4 +92,14 @@ public class GamesEntity {
 //    public void setCountriesByCountryId(CountriesEntity countriesByCountryId) {
 //        this.countriesByCountryId = countriesByCountryId;
 //    }
+
+    public GamesEntity(Long id, String codeName, Short gameYear, Boolean isSummer, List<GamesTEntity> gamesTSById) {
+        this.id = id;
+        this.codeName = codeName;
+        this.gameYear = gameYear;
+        this.isSummer = isSummer;
+        this.gamesTSById = gamesTSById;
+    }
+    public GamesEntity() { }
+
 }

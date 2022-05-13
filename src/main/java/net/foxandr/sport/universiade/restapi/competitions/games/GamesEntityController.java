@@ -7,24 +7,36 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class GamesEntityController {
 
-    private final GamesEntityRepository gamesEntityRepository;
+    private final GamesEntityServiceImpl gamesEntityService;
 
     @Autowired
-    public GamesEntityController(GamesEntityRepository gamesEntityRepository) {
-        this.gamesEntityRepository = gamesEntityRepository;
+    public GamesEntityController(GamesEntityServiceImpl gamesEntityService) {
+        this.gamesEntityService = gamesEntityService;
     }
 
     @GetMapping("/games")
-    public List<GamesEntity> getGamesByLocale(String locale){
-        return gamesEntityRepository.findAllByLocale(locale);
+    public List<GamesInfoEntityDTO> getGamesByLocale(String locale){
+        try{
+            return gamesEntityService.findGamesEntitiesByLocale(locale);
+        } catch (Exception ex) {
+            return null;
+        }
+
     }
 
-//    @GetMapping("/games/{id}")
-//    public GamesEntity getGameById(@PathVariable("id") Long id){
-//        return gamesEntityRepository.findGamesEntitiesById(id);
-//    }
+    @GetMapping("/games/{id}")
+    public GamesInfoEntityDTO getGameById(@PathVariable("id") Long id, String locale){
+
+        try{
+            return gamesEntityService.findGamesEntityByLocaleAndId(locale, id);
+        } catch (Exception ex) {
+            return null;
+        }
+
+    }
 }

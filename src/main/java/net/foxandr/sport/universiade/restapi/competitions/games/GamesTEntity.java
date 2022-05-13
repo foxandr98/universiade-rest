@@ -67,4 +67,11 @@ public class GamesTEntity {
     public void setLanguagesByLocale(LanguagesEntity languagesByLocale) {
         this.languagesByLocale = languagesByLocale;
     }
+
+    public GamesTEntity(String name, String cityName) {
+        this.name = name;
+        this.cityName = cityName;
+    }
+    public GamesTEntity(){}
+
 }
