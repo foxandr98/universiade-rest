@@ -40,10 +40,10 @@ public class GamesEntityController {
         }
     }
 
-    @GetMapping("/games/{id}/participants")
-    public List<GamesEntity> findParticipantsEntitiesByGameIdAndLocale(@PathVariable("id") Long id, String locale){
-        return gamesEntityService.findParticipantsEntitiesByGameIdAndLocale(id, locale);
-    }
+//    @GetMapping("/games/{id}/participants")
+//    public List<GamesEntity> findParticipantsEntitiesByGameIdAndLocale(@PathVariable("id") Long id, String locale){
+//        return gamesEntityService.findParticipantsEntitiesByGameIdAndLocale(id, locale);
+//    }
 
 
 }

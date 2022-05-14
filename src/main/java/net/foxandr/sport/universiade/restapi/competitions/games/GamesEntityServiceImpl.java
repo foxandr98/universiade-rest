@@ -26,8 +26,8 @@ public class GamesEntityServiceImpl implements GamesEntityService{
         return new GamesEntityInfoDTO(gameInfo, gameInfo.getGamesTEntities().get(0));
     }
 
-    public List<GamesEntity> findParticipantsEntitiesByGameIdAndLocale(Long gameId, String locale){
-        return gamesEntityRepository.findParticipantsEntitiesByGameIdAndLocale(gameId, locale);
-    }
+//    public List<GamesEntity> findParticipantsEntitiesByGameIdAndLocale(Long gameId, String locale){
+//        return gamesEntityRepository.findParticipantsEntitiesByGameIdAndLocale(gameId, locale);
+//    }
 
 }

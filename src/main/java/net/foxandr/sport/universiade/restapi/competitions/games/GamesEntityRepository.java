@@ -16,13 +16,13 @@ public interface GamesEntityRepository extends JpaRepository<GamesEntity, Long> 
     @Query("SELECT g FROM GamesEntity g JOIN FETCH g.gamesTEntities gt WHERE gt.gamesTEntityPK.locale = :locale")
     List<GamesEntity> findGamesEntitiesByLocale(String locale);
 
-    @Query("SELECT g " +
-            "FROM GamesEntity g " +
-            "JOIN FETCH g.participantsEntities p " +
-            "JOIN FETCH p.athletesEntity a " +
-            "JOIN FETCH a.athletesTEntities at " +
-            "WHERE at.locale = :locale AND g.id = :gameId")
-    List<GamesEntity> findParticipantsEntitiesByGameIdAndLocale(Long gameId, String locale);
+//    @Query("SELECT g " +
+//            "FROM GamesEntity g " +
+//            "JOIN FETCH g.participantsEntities p " +
+//            "JOIN FETCH p.athletesEntity a " +
+//            "JOIN FETCH a.athletesTEntities at " +
+//            "WHERE at.locale = :locale AND g.id = :gameId")
+//    List<GamesEntity> findParticipantsEntitiesByGameIdAndLocale(Long gameId, String locale);
 
 
 }
