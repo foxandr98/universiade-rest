@@ -25,7 +25,8 @@ public class NewsEntity {
 
     @Column(name = "created_on")
     private Date createdOn;
-    @OneToMany(mappedBy = "newsEntity", orphanRemoval = true)
+    @OneToMany(mappedBy = "newsEntity",cascade = CascadeType.MERGE)
+//    @JoinColumn(name="id")
     @JsonManagedReference
     private List<NewsTEntity> newsTEntities;
 

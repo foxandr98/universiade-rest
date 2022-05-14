@@ -3,6 +3,7 @@ package net.foxandr.sport.universiade.restapi.news;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import net.foxandr.sport.universiade.restapi.LanguagesEntity;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -11,12 +12,11 @@ import java.util.Objects;
 @Table(name = "news_t", schema = "universiade")
 @IdClass(NewsTEntityPK.class)
 public class NewsTEntity {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id", updatable = false, insertable = false)
     private Long id;
     @Id
-    @Column(name = "locale")
+    @Column(name = "locale", updatable = false, insertable = false)
     private String locale;
 
     @Column(name = "title")
@@ -25,7 +25,7 @@ public class NewsTEntity {
     @Column(name = "text")
     private String text;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @MapsId
     @JsonBackReference
     @JoinColumn(name = "id")
@@ -76,18 +76,19 @@ public class NewsTEntity {
         return Objects.hash(id, locale, title, text);
     }
 
-    public NewsEntity getNewsEntity() {
-        return newsEntity;
-    }
-
-    public void setNewsEntity(NewsEntity newsEntity) {
-        this.newsEntity = newsEntity;
-    }
+//    public NewsEntity getNewsEntity() {
+//        return newsEntity;
+//    }
+//
+//    public void setNewsEntity(NewsEntity newsEntity) {
+//        this.newsEntity = newsEntity;
+//    }
 
     public NewsTEntity() {
     }
 
-    public NewsTEntity(String locale, String title, String text) {
+    public NewsTEntity(Long id, String locale, String title, String text) {
+        this.id = id;
         this.locale = locale;
         this.title = title;
         this.text = text;

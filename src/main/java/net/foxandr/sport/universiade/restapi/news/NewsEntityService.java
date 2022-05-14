@@ -52,7 +52,7 @@ public class NewsEntityService {
 
     public NewsEntity createNewNewsEntity(NewsEntityDTO newsDTO) {
         UUID uuid = UUID.randomUUID();
-        Path path = Paths.get("\\images\\news\\" + uuid + newsDTO.getImageFile().getOriginalFilename());
+        Path path = Paths.get("/images/news/" + uuid + newsDTO.getImageFile().getOriginalFilename());
         Date date = new Date(new java.util.Date().getTime());
         try {
             byte[] bytes = newsDTO.getImageFile().getBytes();
@@ -68,19 +68,23 @@ public class NewsEntityService {
                     )
             );
 
+            if (!Files.exists(path))
+                Files.createDirectories(path.getParent());
+            Files.write(path, bytes);
+
+            var generatedNews = newsEntityRepository.save(newsEntity);
+
             List<NewsTEntity> newsTEntityList = List.of(
                     new NewsTEntity(
+                            generatedNews.getId(),
                             newsDTO.getLocale(),
                             newsDTO.getTitle(),
                             newsDTO.getText()
                     ));
 
+            newsEntityTRepository.save(newsTEntityList.get(0));
 
-            if (!Files.exists(path))
-                Files.createDirectories(path.getParent());
-            Files.write(path, bytes);
-
-            return newsEntityRepository.save(newsEntity);
+            return generatedNews;
         } catch (Exception ex) {
             System.out.println("Error saving photo");
             try {
