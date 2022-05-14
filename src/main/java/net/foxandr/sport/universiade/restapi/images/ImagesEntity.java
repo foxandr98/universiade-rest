@@ -1,15 +1,9 @@
-package net.foxandr.sport.universiade.restapi;
+package net.foxandr.sport.universiade.restapi.images;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import net.foxandr.sport.universiade.restapi.lostfound.LostFoundItemsEntity;
-import net.foxandr.sport.universiade.restapi.news.NewsEntity;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.sql.Date;
-import java.util.Collection;
-import java.util.List;
 import java.util.Objects;
 
 @Entity

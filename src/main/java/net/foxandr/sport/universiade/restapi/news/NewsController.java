@@ -1,24 +1,11 @@
 package net.foxandr.sport.universiade.restapi.news;
 
-import com.sun.istack.NotNull;
-import net.foxandr.sport.universiade.restapi.ImageCategoriesEntity;
-import net.foxandr.sport.universiade.restapi.ImagesEntity;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.transaction.Transactional;
-import java.io.Console;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.OpenOption;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -42,15 +29,5 @@ public class NewsController {
                                           @RequestPart MultipartFile imageFile) {
         return newsEntityService.createNewNewsEntity(localedList, imageFile);
     }
-
-//    @PostMapping("/news")
-//    public NewsEntity createNewNewsEntity(@ModelAttribute NewsEntityDTO newsDTO) {
-//        return newsEntityService.createNewNewsEntity(newsDTO);
-//    }
-
-//    @PostMapping("/newImage")
-//    public void createNewImage(@ModelAttribute NewsEntityDTO newsDTO) {
-//        newsEntityService.createNewImage(newsDTO);
-//    }
 
 }

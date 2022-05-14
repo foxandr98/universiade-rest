@@ -1,12 +1,10 @@
 package net.foxandr.sport.universiade.restapi.lostfound;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import net.foxandr.sport.universiade.restapi.ImagesEntity;
-import org.hibernate.annotations.Fetch;
+import net.foxandr.sport.universiade.restapi.images.ImagesEntity;
 
 import javax.persistence.*;
 import java.sql.Date;
-import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity

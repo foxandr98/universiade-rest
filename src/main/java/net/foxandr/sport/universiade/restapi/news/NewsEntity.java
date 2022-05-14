@@ -1,10 +1,9 @@
 package net.foxandr.sport.universiade.restapi.news;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import net.foxandr.sport.universiade.restapi.ImagesEntity;
+import net.foxandr.sport.universiade.restapi.images.ImagesEntity;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 
 import java.util.Date;
 import java.util.List;

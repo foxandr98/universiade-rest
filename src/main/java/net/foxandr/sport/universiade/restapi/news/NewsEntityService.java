@@ -1,11 +1,8 @@
 package net.foxandr.sport.universiade.restapi.news;
 
-import net.foxandr.sport.universiade.restapi.ImageCategoriesEntity;
-import net.foxandr.sport.universiade.restapi.ImagesEntity;
+import net.foxandr.sport.universiade.restapi.images.ImagesEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.interceptor.TransactionAspectSupport;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
@@ -15,7 +12,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
