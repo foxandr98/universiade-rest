@@ -29,19 +29,18 @@ public class NewsEntity {
     @JsonManagedReference
     private List<NewsTEntity> newsTEntities;
 
-//    @OneToOne()
-//    @JsonManagedReference
-//    @JoinColumn(name = "image_uuid")
-//    private ImagesEntity imagesEntity;
+    @OneToOne()
+    @JoinColumn(name = "image_uuid")
+    private ImagesEntity imagesEntity;
 
-//
-//    public ImagesEntity getImagesEntity() {
-//        return imagesEntity;
-//    }
-//
-//    public void setImagesEntity(ImagesEntity imagesEntity) {
-//        this.imagesEntity = imagesEntity;
-//    }
+
+    public ImagesEntity getImagesEntity() {
+        return imagesEntity;
+    }
+
+    public void setImagesEntity(ImagesEntity imagesEntity) {
+        this.imagesEntity = imagesEntity;
+    }
 
     public Long getId() {
         return id;

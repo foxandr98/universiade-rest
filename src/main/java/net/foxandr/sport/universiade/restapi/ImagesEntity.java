@@ -21,10 +21,11 @@ public class ImagesEntity {
     @Column(name = "img_ref")
     private String imgRef;
 
-    @OneToOne(mappedBy = "imagesEntity", fetch = FetchType.LAZY)
-    @JsonBackReference
-    private LostFoundItemsEntity lostFoundItemsEntity;
-
+//    @OneToOne(mappedBy = "imagesEntity", fetch = FetchType.LAZY)
+//    @JsonBackReference
+//    private LostFoundItemsEntity lostFoundItemsEntity;
+//
+//
 //    @OneToOne(mappedBy = "imagesEntity", fetch = FetchType.LAZY)
 //    @JsonBackReference
 //    private NewsEntity newsEntity;
@@ -71,11 +72,19 @@ public class ImagesEntity {
         return Objects.hash(uuid, imgRef);
     }
 
-    public LostFoundItemsEntity getLostFoundItemsEntity() {
-        return lostFoundItemsEntity;
-    }
-
-    public void setLostFoundItemsEntity(LostFoundItemsEntity lostFoundItemsEntity) {
-        this.lostFoundItemsEntity = lostFoundItemsEntity;
-    }
+//    public LostFoundItemsEntity getLostFoundItemsEntity() {
+//        return lostFoundItemsEntity;
+//    }
+//
+//    public void setLostFoundItemsEntity(LostFoundItemsEntity lostFoundItemsEntity) {
+//        this.lostFoundItemsEntity = lostFoundItemsEntity;
+//    }
+//
+//    public NewsEntity getNewsEntity() {
+//        return newsEntity;
+//    }
+//
+//    public void setNewsEntity(NewsEntity newsEntity) {
+//        this.newsEntity = newsEntity;
+//    }
 }
