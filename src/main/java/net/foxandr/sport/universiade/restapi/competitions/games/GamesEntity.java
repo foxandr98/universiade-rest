@@ -1,7 +1,11 @@
 package net.foxandr.sport.universiade.restapi.competitions.games;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import net.foxandr.sport.universiade.restapi.competitions.countries.CountriesEntity;
+import net.foxandr.sport.universiade.restapi.competitions.participants.ParticipantsEntity;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -25,8 +29,22 @@ public class GamesEntity {
     @Column(name = "is_summer")
     private Boolean isSummer;
     @JsonManagedReference
-    @OneToMany(mappedBy = "gamesById")
-    private List<GamesTEntity> gamesTSById;
+    @OneToMany(mappedBy = "gamesEntity")
+    private List<GamesTEntity> gamesTEntities;
+
+    public List<ParticipantsEntity> getParticipantsEntities() {
+        return participantsEntities;
+    }
+
+    public void setParticipantsEntities(List<ParticipantsEntity> participantsEntities) {
+        this.participantsEntities = participantsEntities;
+    }
+
+    @OneToMany(mappedBy = "gamesEntity")
+    @JsonManagedReference
+    private List<ParticipantsEntity> participantsEntities;
+
+
 
 //    @ManyToOne
 //    @JoinColumn(name = "country_id")
@@ -77,12 +95,12 @@ public class GamesEntity {
         return Objects.hash(id, codeName, gameYear, isSummer);
     }
 
-    public List<GamesTEntity> getGamesTSById() {
-        return gamesTSById;
+    public List<GamesTEntity> getGamesTEntities() {
+        return gamesTEntities;
     }
 
-    public void setGamesTSById(List<GamesTEntity> gamesTSById) {
-        this.gamesTSById = gamesTSById;
+    public void setGamesTEntities(List<GamesTEntity> gamesTEntities) {
+        this.gamesTEntities = gamesTEntities;
     }
 
 //    public CountriesEntity getCountriesByCountryId() {
@@ -93,12 +111,12 @@ public class GamesEntity {
 //        this.countriesByCountryId = countriesByCountryId;
 //    }
 
-    public GamesEntity(Long id, String codeName, Short gameYear, Boolean isSummer, List<GamesTEntity> gamesTSById) {
+    public GamesEntity(Long id, String codeName, Short gameYear, Boolean isSummer, List<GamesTEntity> gamesTEntities) {
         this.id = id;
         this.codeName = codeName;
         this.gameYear = gameYear;
         this.isSummer = isSummer;
-        this.gamesTSById = gamesTSById;
+        this.gamesTEntities = gamesTEntities;
     }
     public GamesEntity() { }
 

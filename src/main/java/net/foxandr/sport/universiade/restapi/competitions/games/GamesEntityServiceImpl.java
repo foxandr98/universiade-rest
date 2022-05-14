@@ -15,14 +15,19 @@ public class GamesEntityServiceImpl implements GamesEntityService{
         this.gamesEntityRepository = gamesEntityRepository;
     }
 
-    public List<GamesInfoEntityDTO> findGamesEntitiesByLocale(String locale){
+    public List<GamesEntityInfoDTO> findGamesEntitiesByLocale(String locale){
         return gamesEntityRepository.findGamesEntitiesByLocale(locale).stream()
-                .map(x -> new GamesInfoEntityDTO(x, x.getGamesTSById().get(0)))
+                .map(x -> new GamesEntityInfoDTO(x, x.getGamesTEntities().get(0)))
                 .collect(Collectors.toList());
     }
 
-    public GamesInfoEntityDTO findGamesEntityByLocaleAndId(String locale, Long id){
+    public GamesEntityInfoDTO findGamesEntityByLocaleAndId(String locale, Long id){
         var gameInfo = gamesEntityRepository.findGamesEntityByLocaleAndId(locale, id);
-        return new GamesInfoEntityDTO(gameInfo, gameInfo.getGamesTSById().get(0));
+        return new GamesEntityInfoDTO(gameInfo, gameInfo.getGamesTEntities().get(0));
     }
+
+    public List<GamesEntity> findParticipantsEntitiesByGameIdAndLocale(Long gameId, String locale){
+        return gamesEntityRepository.findParticipantsEntitiesByGameIdAndLocale(gameId, locale);
+    }
+
 }

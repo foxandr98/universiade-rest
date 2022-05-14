@@ -1,6 +1,7 @@
 package net.foxandr.sport.universiade.restapi;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import net.foxandr.sport.universiade.restapi.competitions.athletes.AthletesTEntity;
 import net.foxandr.sport.universiade.restapi.competitions.games.GamesTEntity;
 
 import javax.persistence.*;
@@ -16,9 +17,6 @@ public class LanguagesEntity {
 
     @Column(name = "name")
     private String name;
-    @OneToMany(mappedBy = "languagesByLocale")
-    @JsonBackReference
-    private Collection<GamesTEntity> gamesTSByLocale;
 
     public String getLocale() {
         return locale;
@@ -47,13 +45,5 @@ public class LanguagesEntity {
     @Override
     public int hashCode() {
         return Objects.hash(locale, name);
-    }
-
-    public Collection<GamesTEntity> getGamesTSByLocale() {
-        return gamesTSByLocale;
-    }
-
-    public void setGamesTSByLocale(Collection<GamesTEntity> gamesTSByLocale) {
-        this.gamesTSByLocale = gamesTSByLocale;
     }
 }

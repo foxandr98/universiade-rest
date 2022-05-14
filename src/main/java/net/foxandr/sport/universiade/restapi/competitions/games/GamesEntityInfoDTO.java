@@ -1,11 +1,11 @@
 package net.foxandr.sport.universiade.restapi.competitions.games;
 
-public class GamesInfoEntityDTO {
+public class GamesEntityInfoDTO {
 
     private final GamesEntity gamesEntity;
     private final GamesTEntity gamesTEntity;
 
-    public GamesInfoEntityDTO(GamesEntity gamesEntity, GamesTEntity gamesTEntity) {
+    public GamesEntityInfoDTO(GamesEntity gamesEntity, GamesTEntity gamesTEntity) {
         this.gamesEntity = gamesEntity;
         this.gamesTEntity = gamesTEntity;
     }

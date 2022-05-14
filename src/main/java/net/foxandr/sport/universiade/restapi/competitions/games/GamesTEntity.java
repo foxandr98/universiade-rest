@@ -21,12 +21,7 @@ public class GamesTEntity {
     @MapsId("gameId")
     @JoinColumn(name = "id")
     @JsonBackReference
-    private GamesEntity gamesById;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("locale")
-    @JoinColumn(name = "locale")
-    @JsonIgnore
-    private LanguagesEntity languagesByLocale;
+    private GamesEntity gamesEntity;
 
     public String getName() {
         return name;
@@ -52,20 +47,12 @@ public class GamesTEntity {
         this.gamesTEntityPK = gamesTEntityPK;
     }
 
-    public GamesEntity getGamesById() {
-        return gamesById;
+    public GamesEntity getGamesEntity() {
+        return gamesEntity;
     }
 
-    public void setGamesById(GamesEntity gamesById) {
-        this.gamesById = gamesById;
-    }
-
-    public LanguagesEntity getLanguagesByLocale() {
-        return languagesByLocale;
-    }
-
-    public void setLanguagesByLocale(LanguagesEntity languagesByLocale) {
-        this.languagesByLocale = languagesByLocale;
+    public void setGamesEntity(GamesEntity gamesEntity) {
+        this.gamesEntity = gamesEntity;
     }
 
     public GamesTEntity(String name, String cityName) {

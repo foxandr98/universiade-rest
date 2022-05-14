@@ -1,10 +1,14 @@
 package net.foxandr.sport.universiade.restapi.competitions.athletes;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import net.foxandr.sport.universiade.restapi.competitions.participants.ParticipantsEntity;
 
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -20,10 +24,12 @@ public class AthletesEntity {
     @Basic
     @Column(name = "birhday_date")
     private Date birthdayDate;
-    @OneToMany(mappedBy = "athletesById")
-    private Collection<AthletesTEntity> athletesTSById;
-    @OneToMany(mappedBy = "athletesByAthleteId")
-    private Collection<ParticipantsEntity> participantsById;
+    @OneToMany(mappedBy = "athletesEntity", fetch = FetchType.LAZY)
+    private List<AthletesTEntity> athletesTEntities;
+
+//    @OneToMany(mappedBy = "athletesEntity")
+//    @JsonBackReference
+//    private List<ParticipantsEntity> participantsEntities;
 
     public Long getId() {
         return id;
@@ -41,11 +47,11 @@ public class AthletesEntity {
         this.sex = sex;
     }
 
-    public Date getBirhdayDate() {
+    public Date getBirthdayDate() {
         return birthdayDate;
     }
 
-    public void setBirhdayDate(Date birhdayDate) {
+    public void setBirthdayDate(Date birhdayDate) {
         this.birthdayDate = birhdayDate;
     }
 
@@ -62,19 +68,19 @@ public class AthletesEntity {
         return Objects.hash(id, sex, birthdayDate);
     }
 
-    public Collection<AthletesTEntity> getAthletesTSById() {
-        return athletesTSById;
+    public List<AthletesTEntity> getAthletesTEntities() {
+        return athletesTEntities;
     }
 
-    public void setAthletesTSById(Collection<AthletesTEntity> athletesTSById) {
-        this.athletesTSById = athletesTSById;
+    public void setAthletesTSById(List<AthletesTEntity> athletesTEntities) {
+        this.athletesTEntities = athletesTEntities;
     }
 
-    public Collection<ParticipantsEntity> getParticipantsById() {
-        return participantsById;
-    }
-
-    public void setParticipantsById(Collection<ParticipantsEntity> participantsById) {
-        this.participantsById = participantsById;
-    }
+//    public List<ParticipantsEntity> getParticipantsEntities() {
+//        return participantsEntities;
+//    }
+//
+//    public void setParticipantsEntities(List<ParticipantsEntity> participantsEntities) {
+//        this.participantsEntities = participantsEntities;
+//    }
 }

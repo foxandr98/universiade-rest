@@ -17,8 +17,9 @@ public class UniversitiesEntity {
     @Basic
     @Column(name = "website")
     private String website;
-    @OneToMany(mappedBy = "universitiesByPlayUniversityId")
-    private Collection<ParticipantsEntity> participantsById;
+
+//    @OneToMany(mappedBy = "universitiesByPlayUniversityId")
+//    private Collection<ParticipantsEntity> participantsById;
     @ManyToOne
     @JoinColumn(name = "country_id", referencedColumnName = "id", nullable = false)
     private CountriesEntity countriesByCountryId;
@@ -54,13 +55,13 @@ public class UniversitiesEntity {
         return Objects.hash(id, website);
     }
 
-    public Collection<ParticipantsEntity> getParticipantsById() {
-        return participantsById;
-    }
+//    public Collection<ParticipantsEntity> getParticipantsById() {
+//        return participantsById;
+//    }
 
-    public void setParticipantsById(Collection<ParticipantsEntity> participantsById) {
-        this.participantsById = participantsById;
-    }
+//    public void setParticipantsById(Collection<ParticipantsEntity> participantsById) {
+//        this.participantsById = participantsById;
+//    }
 
     public CountriesEntity getCountriesByCountryId() {
         return countriesByCountryId;

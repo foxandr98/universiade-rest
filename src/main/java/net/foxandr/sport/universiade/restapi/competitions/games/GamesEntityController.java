@@ -1,5 +1,6 @@
 package net.foxandr.sport.universiade.restapi.competitions.games;
 
+import net.foxandr.sport.universiade.restapi.competitions.participants.ParticipantsEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,7 +21,7 @@ public class GamesEntityController {
     }
 
     @GetMapping("/games")
-    public List<GamesInfoEntityDTO> getGamesByLocale(String locale){
+    public List<GamesEntityInfoDTO> getGamesByLocale(String locale){
         try{
             return gamesEntityService.findGamesEntitiesByLocale(locale);
         } catch (Exception ex) {
@@ -30,13 +31,19 @@ public class GamesEntityController {
     }
 
     @GetMapping("/games/{id}")
-    public GamesInfoEntityDTO getGameById(@PathVariable("id") Long id, String locale){
+    public GamesEntityInfoDTO getGameById(@PathVariable("id") Long id, String locale){
 
         try{
             return gamesEntityService.findGamesEntityByLocaleAndId(locale, id);
         } catch (Exception ex) {
             return null;
         }
-
     }
+
+    @GetMapping("/games/{id}/participants")
+    public List<GamesEntity> findParticipantsEntitiesByGameIdAndLocale(@PathVariable("id") Long id, String locale){
+        return gamesEntityService.findParticipantsEntitiesByGameIdAndLocale(id, locale);
+    }
+
+
 }

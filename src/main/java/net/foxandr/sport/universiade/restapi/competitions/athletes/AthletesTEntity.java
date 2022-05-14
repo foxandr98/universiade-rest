@@ -1,5 +1,8 @@
 package net.foxandr.sport.universiade.restapi.competitions.athletes;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import net.foxandr.sport.universiade.restapi.LanguagesEntity;
 
 import javax.persistence.*;
@@ -26,11 +29,10 @@ public class AthletesTEntity {
     @Column(name = "middle_name")
     private String middleName;
     @ManyToOne
-    @JoinColumn(name = "id", referencedColumnName = "id", nullable = false, updatable = false, insertable = false)
-    private AthletesEntity athletesById;
-    @ManyToOne
-    @JoinColumn(name = "locale", referencedColumnName = "locale", nullable = false, insertable = false, updatable = false)
-    private LanguagesEntity languagesByLocale;
+    @JsonBackReference
+    @MapsId("id")
+    @JoinColumn(name = "id", nullable = false, updatable = false, insertable = false)
+    private AthletesEntity athletesEntity;
 
     public Long getId() {
         return id;
@@ -85,19 +87,11 @@ public class AthletesTEntity {
         return Objects.hash(id, locale, firstName, lastName, middleName);
     }
 
-    public AthletesEntity getAthletesById() {
-        return athletesById;
+    public AthletesEntity getAthletesEntity() {
+        return athletesEntity;
     }
 
-    public void setAthletesById(AthletesEntity athletesById) {
-        this.athletesById = athletesById;
-    }
-
-    public LanguagesEntity getLanguagesByLocale() {
-        return languagesByLocale;
-    }
-
-    public void setLanguagesByLocale(LanguagesEntity languagesByLocale) {
-        this.languagesByLocale = languagesByLocale;
+    public void setAthletesById(AthletesEntity athletesEntity) {
+        this.athletesEntity = athletesEntity;
     }
 }

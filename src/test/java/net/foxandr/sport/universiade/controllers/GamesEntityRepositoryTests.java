@@ -2,7 +2,6 @@ package net.foxandr.sport.universiade.controllers;
 
 import net.foxandr.sport.universiade.restapi.competitions.games.GamesEntity;
 import net.foxandr.sport.universiade.restapi.competitions.games.GamesEntityRepository;
-import net.foxandr.sport.universiade.restapi.competitions.games.GamesInfoEntityDTO;
 import net.foxandr.sport.universiade.restapi.competitions.games.GamesTEntity;
 
 import org.junit.Assert;

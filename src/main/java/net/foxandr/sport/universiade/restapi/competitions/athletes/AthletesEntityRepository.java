@@ -1,4 +1,19 @@
 package net.foxandr.sport.universiade.restapi.competitions.athletes;
 
-public class AthletesEntityRepository {
+import net.foxandr.sport.universiade.restapi.competitions.games.GamesEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
+
+public interface AthletesEntityRepository extends JpaRepository<AthletesEntity, Long> {
+
+    @Query("SELECT a FROM AthletesEntity a JOIN FETCH a.athletesTEntities at " +
+            "WHERE at.locale = :locale AND at.id = :id")
+    AthletesEntity findAthletesEntityByLocaleAndId(String locale, Long id);
+
+    @Query("SELECT a FROM AthletesEntity a JOIN FETCH a.athletesTEntities at " +
+            "WHERE at.locale = :locale")
+    List<AthletesEntity> findAthletesEntityByLocale(String locale);
+
 }

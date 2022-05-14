@@ -3,7 +3,9 @@ package net.foxandr.sport.universiade.restapi.competitions.games;
 import java.util.List;
 
 public interface GamesEntityService {
-    GamesInfoEntityDTO findGamesEntityByLocaleAndId(String locale, Long id);
-    List<GamesInfoEntityDTO> findGamesEntitiesByLocale(String locale);
+    GamesEntityInfoDTO findGamesEntityByLocaleAndId(String locale, Long id);
+    List<GamesEntityInfoDTO> findGamesEntitiesByLocale(String locale);
+
+    List<GamesEntity> findParticipantsEntitiesByGameIdAndLocale(Long gameId, String locale);
 
 }
