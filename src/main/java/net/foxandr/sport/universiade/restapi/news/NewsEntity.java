@@ -20,7 +20,7 @@ public class NewsEntity {
 
     @Column(name = "created_on")
     private Date createdOn;
-    @OneToMany(mappedBy = "newsEntity",cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "newsEntity")
     @JsonManagedReference
     private List<NewsTEntity> newsTEntities;
 

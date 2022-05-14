@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
 import java.io.IOException;
@@ -32,11 +33,11 @@ public class NewsEntityService {
     }
 
 
-    public void createNewImage(NewsEntityDTO newsDTO) {
+    public void createNewImage(MultipartFile image) {
         UUID uuid = UUID.randomUUID();
-        Path path = Paths.get("/images/news/" + uuid + newsDTO.getImageFile().getOriginalFilename());
+        Path path = Paths.get("/images/news/" + uuid + image.getOriginalFilename());
         try {
-            byte[] bytes = newsDTO.getImageFile().getBytes();
+            byte[] bytes = image.getBytes();
             if (!Files.exists(path))
                 Files.createDirectories(path.getParent());
             Files.write(path, bytes);
@@ -50,40 +51,52 @@ public class NewsEntityService {
         }
     }
 
-    public NewsEntity createNewNewsEntity(NewsEntityDTO newsDTO) {
-        UUID uuid = UUID.randomUUID();
-        Path path = Paths.get("/images/news/" + uuid + newsDTO.getImageFile().getOriginalFilename());
-        Date date = new Date(new java.util.Date().getTime());
+    public NewsEntity createNewNewsEntity(List<NewsEntityDTO> newsLocaledList, MultipartFile image) {
         try {
-            byte[] bytes = newsDTO.getImageFile().getBytes();
+            var generatedNews = saveImageAndGetNewsEntity(image);
+            if(generatedNews == null)
+                throw new Exception("");
+            List<NewsTEntity> newsTEntityList = new ArrayList<>();
+            Long id = generatedNews.getId();
+            for (NewsEntityDTO newsEntityDTO : newsLocaledList) {
+                newsTEntityList.add(
+                        new NewsTEntity(
+                                id,
+                                newsEntityDTO.getLocale(),
+                                newsEntityDTO.getTitle(),
+                                newsEntityDTO.getText()
+                        ));
+            }
 
-            NewsEntity newsEntity = new NewsEntity(
-                    date,
-                    new ImagesEntity(
-                            uuid.toString(),
-                            path.toString(),
-                            (long) 3,
-                            date
-                    )
-            );
+            newsEntityTRepository.saveAll(newsTEntityList);
+            generatedNews.setNewsTEntities(newsTEntityList);
+            return generatedNews;
+        } catch (Exception ex) {
+            return null;
+        }
+    }
 
+    private NewsEntity saveImageAndGetNewsEntity(MultipartFile image) {
+
+        UUID uuid = UUID.randomUUID();
+        Path path = Paths.get("/images/news/" + uuid + image.getOriginalFilename());
+        Date date = new Date(new java.util.Date().getTime());
+
+        NewsEntity newsEntity = new NewsEntity(
+                date,
+                new ImagesEntity(
+                        uuid.toString(),
+                        path.toString(),
+                        (long) 3,
+                        date
+                )
+        );
+        try {
+            byte[] bytes = image.getBytes();
             if (!Files.exists(path))
                 Files.createDirectories(path.getParent());
             Files.write(path, bytes);
-
-            var generatedNews = newsEntityRepository.save(newsEntity);
-
-            List<NewsTEntity> newsTEntityList = List.of(
-                    new NewsTEntity(
-                            generatedNews.getId(),
-                            newsDTO.getLocale(),
-                            newsDTO.getTitle(),
-                            newsDTO.getText()
-                    ));
-
-            newsEntityTRepository.save(newsTEntityList.get(0));
-
-            return generatedNews;
+            return newsEntityRepository.save(newsEntity);
         } catch (Exception ex) {
             System.out.println("Error saving photo");
             try {
@@ -96,7 +109,7 @@ public class NewsEntityService {
         }
     }
 
-    public List<NewsEntity> findAllByLocale(String locale) {
-        return newsEntityRepository.findAllByLocale(locale);
+        public List<NewsEntity> findAllByLocale (String locale){
+            return newsEntityRepository.findAllByLocale(locale);
+        }
     }
-}

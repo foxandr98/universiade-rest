@@ -1,5 +1,6 @@
 package net.foxandr.sport.universiade.restapi.news;
 
+import com.sun.istack.NotNull;
 import net.foxandr.sport.universiade.restapi.ImageCategoriesEntity;
 import net.foxandr.sport.universiade.restapi.ImagesEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,9 +38,15 @@ public class NewsController {
 
 
     @PostMapping("/news")
-    public NewsEntity createNewNewsEntity(@ModelAttribute NewsEntityDTO newsDTO) {
-        return newsEntityService.createNewNewsEntity(newsDTO);
+    public NewsEntity createNewNewsEntity(@RequestPart ArrayList<NewsEntityDTO> localedList,
+                                          @RequestPart MultipartFile imageFile) {
+        return newsEntityService.createNewNewsEntity(localedList, imageFile);
     }
+
+//    @PostMapping("/news")
+//    public NewsEntity createNewNewsEntity(@ModelAttribute NewsEntityDTO newsDTO) {
+//        return newsEntityService.createNewNewsEntity(newsDTO);
+//    }
 
 //    @PostMapping("/newImage")
 //    public void createNewImage(@ModelAttribute NewsEntityDTO newsDTO) {
