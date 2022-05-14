@@ -59,7 +59,6 @@ public class NewsEntityService {
 
             NewsEntity newsEntity = new NewsEntity(
                     date,
-                    null,
                     new ImagesEntity(
                             uuid.toString(),
                             path.toString(),

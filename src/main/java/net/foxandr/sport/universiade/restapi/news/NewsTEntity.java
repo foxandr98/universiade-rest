@@ -76,13 +76,13 @@ public class NewsTEntity {
         return Objects.hash(id, locale, title, text);
     }
 
-//    public NewsEntity getNewsEntity() {
-//        return newsEntity;
-//    }
-//
-//    public void setNewsEntity(NewsEntity newsEntity) {
-//        this.newsEntity = newsEntity;
-//    }
+    public NewsEntity getNewsEntity() {
+        return newsEntity;
+    }
+
+    public void setNewsEntity(NewsEntity newsEntity) {
+        this.newsEntity = newsEntity;
+    }
 
     public NewsTEntity() {
     }

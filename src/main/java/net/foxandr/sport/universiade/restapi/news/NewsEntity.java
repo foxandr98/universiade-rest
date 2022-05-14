@@ -18,15 +18,9 @@ public class NewsEntity {
     @Column(name = "id")
     private Long id;
 
-//    @Column(name = "image_uuid", insertable = false, updatable = false)
-//    private String image_uuid;
-
-
-
     @Column(name = "created_on")
     private Date createdOn;
     @OneToMany(mappedBy = "newsEntity",cascade = CascadeType.MERGE)
-//    @JoinColumn(name="id")
     @JsonManagedReference
     private List<NewsTEntity> newsTEntities;
 
@@ -80,13 +74,8 @@ public class NewsEntity {
         this.newsTEntities = newsTEntities;
     }
 
-//    public String getImage_uuid() {
-//        return image_uuid;
-//    }
-
-    public NewsEntity(Date createdOn, List<NewsTEntity> newsTEntities, ImagesEntity imagesEntity) {
+    public NewsEntity(Date createdOn, ImagesEntity imagesEntity) {
         this.createdOn = createdOn;
-        this.newsTEntities = newsTEntities;
         this.imagesEntity = imagesEntity;
     }
 
