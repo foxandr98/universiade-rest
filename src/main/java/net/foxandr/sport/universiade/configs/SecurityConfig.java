@@ -1,4 +1,4 @@
-package net.foxandr.sport.universiade.security;
+package net.foxandr.sport.universiade.configs;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

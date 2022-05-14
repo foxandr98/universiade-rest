@@ -25,11 +25,11 @@ public class NewsEntity {
 
     @Column(name = "created_on")
     private Date createdOn;
-    @OneToMany(mappedBy = "newsEntity")
+    @OneToMany(mappedBy = "newsEntity", orphanRemoval = true)
     @JsonManagedReference
     private List<NewsTEntity> newsTEntities;
 
-    @OneToOne()
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "image_uuid")
     private ImagesEntity imagesEntity;
 
@@ -82,6 +82,15 @@ public class NewsEntity {
 //    public String getImage_uuid() {
 //        return image_uuid;
 //    }
+
+    public NewsEntity(Date createdOn, List<NewsTEntity> newsTEntities, ImagesEntity imagesEntity) {
+        this.createdOn = createdOn;
+        this.newsTEntities = newsTEntities;
+        this.imagesEntity = imagesEntity;
+    }
+
+    public NewsEntity() {
+    }
 //
 //    public void setImage_uuid(String image_uuid) {
 //        this.image_uuid = image_uuid;

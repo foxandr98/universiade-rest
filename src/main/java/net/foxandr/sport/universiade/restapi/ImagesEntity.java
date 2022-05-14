@@ -7,6 +7,7 @@ import net.foxandr.sport.universiade.restapi.news.NewsEntity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
@@ -21,6 +22,19 @@ public class ImagesEntity {
     @Column(name = "img_ref")
     private String imgRef;
 
+    @Column(name = "img_category_id")
+    private Long categoryId;
+
+    @Column(name = "created_on")
+    private Date createdOn;
+
+    public Date getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(Date createdOn) {
+        this.createdOn = createdOn;
+    }
 //    @OneToOne(mappedBy = "imagesEntity", fetch = FetchType.LAZY)
 //    @JsonBackReference
 //    private LostFoundItemsEntity lostFoundItemsEntity;
@@ -32,7 +46,7 @@ public class ImagesEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonManagedReference
-    @JoinColumn(name = "img_category_id")
+    @JoinColumn(name = "img_category_id", updatable = false, insertable = false)
     private ImageCategoriesEntity imageCategoriesEntity;
 
     public String getUuid() {
@@ -87,4 +101,23 @@ public class ImagesEntity {
 //    public void setNewsEntity(NewsEntity newsEntity) {
 //        this.newsEntity = newsEntity;
 //    }
+
+
+    public ImagesEntity() {
+    }
+
+    public ImagesEntity(String uuid, String imgRef, Long categoryId, Date createdOn) {
+        this.uuid = uuid;
+        this.imgRef = imgRef;
+        this.categoryId = categoryId;
+        this.createdOn = createdOn;
+    }
+
+    public Long getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
+    }
 }

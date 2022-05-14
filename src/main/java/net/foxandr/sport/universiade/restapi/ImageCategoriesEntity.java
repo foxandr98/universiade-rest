@@ -9,11 +9,10 @@ import java.util.Objects;
 @Entity
 @Table(name = "image_categories", schema = "universiade")
 public class ImageCategoriesEntity {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
     private Long id;
-    @Basic
+
     @Column(name = "name")
     private String name;
     @OneToMany(mappedBy = "imageCategoriesEntity")
@@ -55,5 +54,12 @@ public class ImageCategoriesEntity {
 
     public void setImagesEntities(List<ImagesEntity> imagesEntities) {
         this.imagesEntities = imagesEntities;
+    }
+
+    public ImageCategoriesEntity() {
+    }
+
+    public ImageCategoriesEntity(Long id, String name) {
+        this.name = name;
     }
 }

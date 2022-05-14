@@ -13,22 +13,22 @@ import java.util.Objects;
 public class NewsTEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "id")
+    @Column(name = "id", updatable = false, insertable = false)
     private Long id;
     @Id
     @Column(name = "locale")
     private String locale;
-    @Basic
+
     @Column(name = "title")
     private String title;
-    @Basic
+
     @Column(name = "text")
     private String text;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @MapsId
     @JsonBackReference
-    @JoinColumn(name = "id", referencedColumnName = "id", nullable = false, updatable = false, insertable = false)
+    @JoinColumn(name = "id")
     private NewsEntity newsEntity;
 
     public Long getId() {
@@ -82,5 +82,14 @@ public class NewsTEntity {
 
     public void setNewsEntity(NewsEntity newsEntity) {
         this.newsEntity = newsEntity;
+    }
+
+    public NewsTEntity() {
+    }
+
+    public NewsTEntity(String locale, String title, String text) {
+        this.locale = locale;
+        this.title = title;
+        this.text = text;
     }
 }
