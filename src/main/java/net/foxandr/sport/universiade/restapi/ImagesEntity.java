@@ -3,6 +3,7 @@ package net.foxandr.sport.universiade.restapi;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import net.foxandr.sport.universiade.restapi.lostfound.LostFoundItemsEntity;
+import net.foxandr.sport.universiade.restapi.news.NewsEntity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -20,11 +21,15 @@ public class ImagesEntity {
     @Column(name = "img_ref")
     private String imgRef;
 
-    @OneToOne(mappedBy = "imagesEntity")
+    @OneToOne(mappedBy = "imagesEntity", fetch = FetchType.LAZY)
     @JsonBackReference
     private LostFoundItemsEntity lostFoundItemsEntity;
 
-    @ManyToOne()
+//    @OneToOne(mappedBy = "imagesEntity", fetch = FetchType.LAZY)
+//    @JsonBackReference
+//    private NewsEntity newsEntity;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonManagedReference
     @JoinColumn(name = "img_category_id")
     private ImageCategoriesEntity imageCategoriesEntity;
