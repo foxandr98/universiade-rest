@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface NewsEntityRepository extends JpaRepository<NewsEntity, Long> {
-
     @Query("SELECT n FROM NewsEntity n " +
             "JOIN FETCH n.newsTEntities nt " +
             "JOIN FETCH n.imagesEntity i " +

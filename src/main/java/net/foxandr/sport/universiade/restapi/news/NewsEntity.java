@@ -80,8 +80,4 @@ public class NewsEntity {
 
     public NewsEntity() {
     }
-//
-//    public void setImage_uuid(String image_uuid) {
-//        this.image_uuid = image_uuid;
-//    }
 }

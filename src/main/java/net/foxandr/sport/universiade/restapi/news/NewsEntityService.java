@@ -19,7 +19,6 @@ import java.util.UUID;
 @Service
 @Transactional
 public class NewsEntityService {
-
     NewsEntityRepository newsEntityRepository;
     NewsEntityTRepository newsEntityTRepository;
 
@@ -29,52 +28,18 @@ public class NewsEntityService {
         this.newsEntityTRepository = newsEntityTRepository;
     }
 
-
-    public void createNewImage(MultipartFile image) {
-        UUID uuid = UUID.randomUUID();
-        Path path = Paths.get("/images/news/" + uuid + image.getOriginalFilename());
-        try {
-            byte[] bytes = image.getBytes();
-            if (!Files.exists(path))
-                Files.createDirectories(path.getParent());
-            Files.write(path, bytes);
-        } catch (Exception ex) {
-            System.out.println("Error saving photo");
-            try {
-                Files.deleteIfExists(path);
-            } catch (IOException e) {
-                System.out.println("Error while deleting file");
-            }
-        }
-    }
-
     public NewsEntity createNewNewsEntity(List<NewsEntityDTO> newsLocaledList, MultipartFile image) {
         try {
-            var generatedNews = saveImageAndGetNewsEntity(image);
-            if(generatedNews == null)
+            var generatedNews = saveImageAndGetNewsEntity(newsLocaledList, image);
+            if (generatedNews == null)
                 throw new Exception("");
-            List<NewsTEntity> newsTEntityList = new ArrayList<>();
-            Long id = generatedNews.getId();
-            for (NewsEntityDTO newsEntityDTO : newsLocaledList) {
-                newsTEntityList.add(
-                        new NewsTEntity(
-                                id,
-                                newsEntityDTO.getLocale(),
-                                newsEntityDTO.getTitle(),
-                                newsEntityDTO.getText()
-                        ));
-            }
-
-            newsEntityTRepository.saveAll(newsTEntityList);
-            generatedNews.setNewsTEntities(newsTEntityList);
             return generatedNews;
         } catch (Exception ex) {
             return null;
         }
     }
 
-    private NewsEntity saveImageAndGetNewsEntity(MultipartFile image) {
-
+    private NewsEntity saveImageAndGetNewsEntity(List<NewsEntityDTO> newsLocaledList, MultipartFile image) {
         UUID uuid = UUID.randomUUID();
         Path path = Paths.get("/images/news/" + uuid + image.getOriginalFilename());
         Date date = new Date(new java.util.Date().getTime());
@@ -88,10 +53,36 @@ public class NewsEntityService {
                         date
                 )
         );
-        return Utils.saveImageAndEntity(path, image, newsEntityRepository, newsEntity);
-    }
+        NewsEntity newNewsEntity = Utils.saveImageAndEntity(path, image, newsEntityRepository, newsEntity);
 
-        public List<NewsEntity> findAllByLocale (String locale){
-            return newsEntityRepository.findAllByLocale(locale);
+        List<NewsTEntity> newsTEntityList = new ArrayList<>();
+        Long id = newNewsEntity.getId();
+        for (NewsEntityDTO newsEntityDTO : newsLocaledList) {
+            newsTEntityList.add(
+                    new NewsTEntity(
+                            id,
+                            newsEntityDTO.getLocale(),
+                            newsEntityDTO.getTitle(),
+                            newsEntityDTO.getText()
+                    ));
+        }
+        try {
+            newsEntityTRepository.saveAll(newsTEntityList);
+            newNewsEntity.setNewsTEntities(newsTEntityList);
+            return newNewsEntity;
+        } catch (Exception ex) {
+            System.out.println("Error saving photo");
+            try {
+                Files.deleteIfExists(path);
+            } catch (IOException e) {
+                System.out.println("Error while deleting file");
+                return null;
+            }
+            return null;
         }
     }
+
+    public List<NewsEntity> findAllByLocale(String locale) {
+        return newsEntityRepository.findAllByLocale(locale);
+    }
+}
