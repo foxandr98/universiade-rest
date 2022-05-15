@@ -38,7 +38,7 @@ public class LostFoundItemsEntity {
     @JoinColumn(name = "image_uuid")
     private ImagesEntity imagesEntity;
 
-    @OneToOne(mappedBy = "lostFoundItemsEntity", fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "lostFoundItemsEntity", fetch = FetchType.LAZY)
     @JsonManagedReference
     private LostFoundRequestsEntity lostFoundRequestsEntity;
 

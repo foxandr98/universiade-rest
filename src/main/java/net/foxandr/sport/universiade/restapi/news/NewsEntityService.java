@@ -1,6 +1,7 @@
 package net.foxandr.sport.universiade.restapi.news;
 
 import net.foxandr.sport.universiade.restapi.images.ImagesEntity;
+import net.foxandr.sport.universiade.util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -87,22 +88,7 @@ public class NewsEntityService {
                         date
                 )
         );
-        try {
-            byte[] bytes = image.getBytes();
-            if (!Files.exists(path))
-                Files.createDirectories(path.getParent());
-            Files.write(path, bytes);
-            return newsEntityRepository.save(newsEntity);
-        } catch (Exception ex) {
-            System.out.println("Error saving photo");
-            try {
-                Files.deleteIfExists(path);
-            } catch (IOException e) {
-                System.out.println("Error while deleting file");
-                return null;
-            }
-            return null;
-        }
+        return Utils.saveImageAndEntity(path, image, newsEntityRepository, newsEntity);
     }
 
         public List<NewsEntity> findAllByLocale (String locale){

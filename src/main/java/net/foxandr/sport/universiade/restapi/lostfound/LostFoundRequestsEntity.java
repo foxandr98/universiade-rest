@@ -9,7 +9,8 @@ import java.util.Objects;
 @Table(name = "lost_found_requests", schema = "universiade")
 public class LostFoundRequestsEntity {
     @Id
-    @Column(name = "lost_found_item_id", insertable = false, updatable = false)
+    @GeneratedValue
+    @Column(name = "lost_found_item_id")
     private Long lostFoundItemId;
 
     @Column(name = "contact_name")
@@ -18,10 +19,10 @@ public class LostFoundRequestsEntity {
     @Column(name = "contact_to_notify")
     private String contactToNotify;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @MapsId
     @JsonBackReference
-    @JoinColumn(name = "lost_found_item_id")
+    @JoinColumn(name = "lost_found_item_id", insertable = false, updatable = false)
     private LostFoundItemsEntity lostFoundItemsEntity;
 
     public LostFoundItemsEntity getLostFoundItemsEntity() {
@@ -71,6 +72,11 @@ public class LostFoundRequestsEntity {
 
     public LostFoundRequestsEntity(Long id, String contactName, String contactToNotify) {
         this.lostFoundItemId = id;
+        this.contactName = contactName;
+        this.contactToNotify = contactToNotify;
+    }
+
+    public LostFoundRequestsEntity(String contactName, String contactToNotify) {
         this.contactName = contactName;
         this.contactToNotify = contactToNotify;
     }
