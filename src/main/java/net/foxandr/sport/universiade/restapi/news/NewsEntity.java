@@ -2,6 +2,7 @@ package net.foxandr.sport.universiade.restapi.news;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import net.foxandr.sport.universiade.restapi.images.ImagesEntity;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 
@@ -19,11 +20,11 @@ public class NewsEntity {
 
     @Column(name = "created_on")
     private Date createdOn;
-    @OneToMany(mappedBy = "newsEntity")
+    @OneToMany(mappedBy = "id.newsEntity", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonManagedReference
     private List<NewsTEntity> newsTEntities;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JoinColumn(name = "image_uuid")
     private ImagesEntity imagesEntity;
 
@@ -80,4 +81,6 @@ public class NewsEntity {
 
     public NewsEntity() {
     }
+
+
 }

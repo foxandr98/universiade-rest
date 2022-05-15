@@ -1,22 +1,33 @@
 package net.foxandr.sport.universiade.restapi.news;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
+@Embeddable
 public class NewsTEntityPK implements Serializable {
-    private Long id;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id")
+    @JsonIgnore
+    private NewsEntity newsEntity;
     private String locale;
 
-    public Long getId() {
-        return id;
+    public NewsTEntityPK(NewsEntity newsEntity, String locale) {
+        this.newsEntity = newsEntity;
+        this.locale = locale;
+    }
+    public NewsTEntityPK() {
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public NewsEntity getNewsEntity() {
+        return newsEntity;
+    }
+
+    public void setNewsEntity(NewsEntity newsEntity) {
+        this.newsEntity = newsEntity;
     }
 
     public String getLocale() {
@@ -32,11 +43,12 @@ public class NewsTEntityPK implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         NewsTEntityPK that = (NewsTEntityPK) o;
-        return Objects.equals(id, that.id) && Objects.equals(locale, that.locale);
+        return newsEntity.equals(that.newsEntity) && locale.equals(that.locale);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, locale);
+        return Objects.hash(newsEntity, locale);
     }
+
 }

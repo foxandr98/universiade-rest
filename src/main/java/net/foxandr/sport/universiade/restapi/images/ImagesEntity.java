@@ -37,7 +37,6 @@ public class ImagesEntity {
 //    @OneToOne(mappedBy = "imagesEntity", fetch = FetchType.LAZY)
 //    @JsonBackReference
 //    private NewsEntity newsEntity;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonManagedReference
     @JoinColumn(name = "img_category_id", updatable = false, insertable = false)

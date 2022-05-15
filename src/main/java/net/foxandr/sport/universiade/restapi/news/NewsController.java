@@ -20,7 +20,7 @@ public class NewsController {
 
     @GetMapping("/news")
     public List<NewsEntity> getNewsByLocale(String locale){
-       return newsEntityService.findAllByLocale(locale);
+       return newsEntityService.getAllByLocale(locale);
     }
 
 

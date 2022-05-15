@@ -23,11 +23,12 @@ public class ImageEntityService {
         this.imagesEntityRepository = imagesEntityRepository;
     }
 
-    public byte[] getImageByUuid(String uuid){
-        ImagesEntity imageEntity = imagesEntityRepository.getImagesEntityByUuid(uuid);
-        var imageRef = imageEntity.getImgRef();
-        var extension = imageRef.substring(imageRef.lastIndexOf('.') + 1);
+    public byte[] getImageByUuid(String uuid) {
         try {
+            ImagesEntity imageEntity = imagesEntityRepository.getImagesEntityByUuid(uuid);
+            var imageRef = imageEntity.getImgRef();
+            var extension = imageRef.substring(imageRef.lastIndexOf('.') + 1);
+
             InputStream is = Files.newInputStream(Paths.get(imageRef));
             BufferedImage image = ImageIO.read(is);
             ByteArrayOutputStream bao = new ByteArrayOutputStream();
@@ -38,9 +39,6 @@ public class ImageEntityService {
             return null;
         }
     }
-
-
-
 
 
 }

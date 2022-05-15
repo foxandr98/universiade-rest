@@ -1,5 +1,6 @@
 package net.foxandr.sport.universiade.restapi.news;
 
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -10,6 +11,6 @@ public interface NewsEntityRepository extends JpaRepository<NewsEntity, Long> {
             "JOIN FETCH n.newsTEntities nt " +
             "JOIN FETCH n.imagesEntity i " +
             "JOIN FETCH i.imageCategoriesEntity ic " +
-            "WHERE nt.locale = :locale")
-    List<NewsEntity> findAllByLocale(String locale);
+            "WHERE nt.id.locale = :locale")
+    List<NewsEntity> getAllByNewsTEntitiesLocale(String locale);
 }

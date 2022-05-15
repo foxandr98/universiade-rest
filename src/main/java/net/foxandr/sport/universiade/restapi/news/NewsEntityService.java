@@ -1,6 +1,7 @@
 package net.foxandr.sport.universiade.restapi.news;
 
 import net.foxandr.sport.universiade.restapi.images.ImagesEntity;
+import net.foxandr.sport.universiade.util.ImageCategories;
 import net.foxandr.sport.universiade.util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,12 +21,10 @@ import java.util.UUID;
 @Transactional
 public class NewsEntityService {
     NewsEntityRepository newsEntityRepository;
-    NewsEntityTRepository newsEntityTRepository;
-
     @Autowired
-    public NewsEntityService(NewsEntityTRepository newsEntityTRepository, NewsEntityRepository newsEntityRepository) {
+    public NewsEntityService(NewsEntityRepository newsEntityRepository) {
         this.newsEntityRepository = newsEntityRepository;
-        this.newsEntityTRepository = newsEntityTRepository;
+
     }
 
     public NewsEntity createNewNewsEntity(List<NewsEntityDTO> newsLocaledList, MultipartFile image) {
@@ -49,40 +48,27 @@ public class NewsEntityService {
                 new ImagesEntity(
                         uuid.toString(),
                         path.toString(),
-                        (long) 3,
+                        ImageCategories.NEWS.getNumber(),
                         date
                 )
         );
-        NewsEntity newNewsEntity = Utils.saveImageAndEntity(path, image, newsEntityRepository, newsEntity);
-
         List<NewsTEntity> newsTEntityList = new ArrayList<>();
-        Long id = newNewsEntity.getId();
         for (NewsEntityDTO newsEntityDTO : newsLocaledList) {
-            newsTEntityList.add(
-                    new NewsTEntity(
-                            id,
-                            newsEntityDTO.getLocale(),
-                            newsEntityDTO.getTitle(),
-                            newsEntityDTO.getText()
-                    ));
+            NewsTEntity newsTEntity = new NewsTEntity(
+                    new NewsTEntityPK(
+                            newsEntity,
+                            newsEntityDTO.getLocale()),
+                    newsEntityDTO.getTitle(),
+                    newsEntityDTO.getText()
+            );
+            newsTEntityList.add(newsTEntity);
         }
-        try {
-            newsEntityTRepository.saveAll(newsTEntityList);
-            newNewsEntity.setNewsTEntities(newsTEntityList);
-            return newNewsEntity;
-        } catch (Exception ex) {
-            System.out.println("Error saving photo");
-            try {
-                Files.deleteIfExists(path);
-            } catch (IOException e) {
-                System.out.println("Error while deleting file");
-                return null;
-            }
-            return null;
-        }
+        newsEntity.setNewsTEntities(newsTEntityList);
+
+        return Utils.saveImageAndEntity(path, image, newsEntityRepository, newsEntity);
     }
 
-    public List<NewsEntity> findAllByLocale(String locale) {
-        return newsEntityRepository.findAllByLocale(locale);
+    public List<NewsEntity> getAllByLocale(String locale) {
+        return newsEntityRepository.getAllByNewsTEntitiesLocale(locale);
     }
 }
