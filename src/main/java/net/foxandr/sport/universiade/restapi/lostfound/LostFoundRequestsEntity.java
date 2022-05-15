@@ -9,7 +9,7 @@ import java.util.Objects;
 @Table(name = "lost_found_requests", schema = "universiade")
 public class LostFoundRequestsEntity {
     @Id
-    @Column(name = "lost_found_item_id")
+    @Column(name = "lost_found_item_id", insertable = false, updatable = false)
     private Long lostFoundItemId;
 
     @Column(name = "contact_name")
@@ -67,5 +67,14 @@ public class LostFoundRequestsEntity {
     @Override
     public int hashCode() {
         return Objects.hash(lostFoundItemId, contactName, contactToNotify);
+    }
+
+    public LostFoundRequestsEntity(Long id, String contactName, String contactToNotify) {
+        this.lostFoundItemId = id;
+        this.contactName = contactName;
+        this.contactToNotify = contactToNotify;
+    }
+
+    public LostFoundRequestsEntity() {
     }
 }

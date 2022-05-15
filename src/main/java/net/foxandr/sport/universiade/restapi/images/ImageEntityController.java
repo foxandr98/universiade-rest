@@ -15,28 +15,16 @@ import java.nio.file.Paths;
 @RequestMapping("/api/v1")
 public class ImageEntityController {
 
-    ImagesEntityRepository imagesEntityRepository;
+    ImageEntityService imageEntityService;
 
     @Autowired
-    public ImageEntityController(ImagesEntityRepository imagesEntityRepository) {
-        this.imagesEntityRepository = imagesEntityRepository;
+    public ImageEntityController(ImageEntityService imageEntityService) {
+        this.imageEntityService = imageEntityService;
     }
 
     @GetMapping(value = "/images/{uuid}", produces = "image/jpg")
     public @ResponseBody byte[] getImageByUuid(@PathVariable("uuid") String uuid){
-        ImagesEntity imageEntity = imagesEntityRepository.getImagesEntityByUuid(uuid);
-        var imageRef = imageEntity.getImgRef();
-        var extension = imageRef.substring(imageRef.lastIndexOf('.') + 1);
-        try {
-            InputStream is = Files.newInputStream(Paths.get(imageRef));
-            BufferedImage image = ImageIO.read(is);
-            ByteArrayOutputStream bao = new ByteArrayOutputStream();
-            ImageIO.write(image, extension, bao);
-            return Base64.encodeBase64(bao.toByteArray());
-        } catch (Exception ex) {
-            System.out.println("Error while downloading Image");
-            return null;
-        }
+        return imageEntityService.getImageByUuid(uuid);
     }
 
 }

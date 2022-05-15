@@ -33,9 +33,9 @@ public class LostFoundItemsEntity {
     @Column(name = "created_on")
     private Date createdOn;
 
-    @OneToOne()
-//    @JsonManagedReference
-    @JoinColumn(name = "image_uuid", referencedColumnName = "uuid")
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    @JoinColumn(name = "image_uuid")
     private ImagesEntity imagesEntity;
 
     @OneToOne(mappedBy = "lostFoundItemsEntity", fetch = FetchType.LAZY)
@@ -117,5 +117,24 @@ public class LostFoundItemsEntity {
 
     public void setLostFoundRequestsEntity(LostFoundRequestsEntity lostFoundRequestsEntity) {
         this.lostFoundRequestsEntity = lostFoundRequestsEntity;
+    }
+
+    public ImagesEntity getImagesEntity() {
+        return imagesEntity;
+    }
+
+    public void setImagesEntity(ImagesEntity imagesEntity) {
+        this.imagesEntity = imagesEntity;
+    }
+
+    public LostFoundItemsEntity(String itemDescription, String lostItemArea, String cityName, Boolean isRequest,
+                                Boolean isFound, Date createdOn, ImagesEntity imagesEntity) {
+        this.itemDescription = itemDescription;
+        this.lostItemArea = lostItemArea;
+        this.cityName = cityName;
+        this.isRequest = isRequest;
+        this.isFound = isFound;
+        this.createdOn = createdOn;
+        this.imagesEntity = imagesEntity;
     }
 }
