@@ -3,7 +3,7 @@ package net.foxandr.sport.universiade.restapi.images;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.time.Instant;
 import java.util.Objects;
 
 @Entity
@@ -20,13 +20,13 @@ public class ImagesEntity {
     private Long categoryId;
 
     @Column(name = "created_on")
-    private Date createdOn;
+    private Instant createdOn;
 
-    public Date getCreatedOn() {
+    public Instant getCreatedOn() {
         return createdOn;
     }
 
-    public void setCreatedOn(Date createdOn) {
+    public void setCreatedOn(Instant createdOn) {
         this.createdOn = createdOn;
     }
 //    @OneToOne(mappedBy = "imagesEntity", fetch = FetchType.LAZY)
@@ -99,7 +99,7 @@ public class ImagesEntity {
     public ImagesEntity() {
     }
 
-    public ImagesEntity(String uuid, String imgRef, Long categoryId, Date createdOn) {
+    public ImagesEntity(String uuid, String imgRef, Long categoryId, Instant createdOn) {
         this.uuid = uuid;
         this.imgRef = imgRef;
         this.categoryId = categoryId;

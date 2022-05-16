@@ -2,6 +2,7 @@ package net.foxandr.sport.universiade.restapi.news;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -50,5 +51,6 @@ public class NewsTEntityPK implements Serializable {
     public int hashCode() {
         return Objects.hash(newsEntity, locale);
     }
+
 
 }

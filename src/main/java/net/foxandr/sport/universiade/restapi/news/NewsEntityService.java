@@ -8,11 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.sql.Date;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -41,7 +39,7 @@ public class NewsEntityService {
     private NewsEntity saveImageAndGetNewsEntity(List<NewsEntityDTO> newsLocaledList, MultipartFile image) {
         UUID uuid = UUID.randomUUID();
         Path path = Paths.get("/images/news/" + uuid + image.getOriginalFilename());
-        Date date = new Date(new java.util.Date().getTime());
+        Instant date = Instant.now();
 
         NewsEntity newsEntity = new NewsEntity(
                 date,

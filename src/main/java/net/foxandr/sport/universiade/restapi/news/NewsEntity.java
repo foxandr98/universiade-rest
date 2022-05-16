@@ -1,17 +1,16 @@
 package net.foxandr.sport.universiade.restapi.news;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import net.foxandr.sport.universiade.restapi.images.ImagesEntity;
-import org.hibernate.annotations.Cascade;
-
 import javax.persistence.*;
-
-import java.util.Date;
+import java.time.Instant;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name = "news", schema = "universiade")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class NewsEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -19,7 +18,7 @@ public class NewsEntity {
     private Long id;
 
     @Column(name = "created_on")
-    private Date createdOn;
+    private Instant createdOn;
     @OneToMany(mappedBy = "id.newsEntity", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonManagedReference
     private List<NewsTEntity> newsTEntities;
@@ -45,11 +44,11 @@ public class NewsEntity {
         this.id = id;
     }
 
-    public Date getCreatedOn() {
+    public Instant getCreatedOn() {
         return createdOn;
     }
 
-    public void setCreatedOn(Date createdOn) {
+    public void setCreatedOn(Instant createdOn) {
         this.createdOn = createdOn;
     }
 
@@ -74,13 +73,12 @@ public class NewsEntity {
         this.newsTEntities = newsTEntities;
     }
 
-    public NewsEntity(Date createdOn, ImagesEntity imagesEntity) {
+    public NewsEntity(Instant createdOn, ImagesEntity imagesEntity) {
         this.createdOn = createdOn;
         this.imagesEntity = imagesEntity;
     }
 
     public NewsEntity() {
     }
-
 
 }

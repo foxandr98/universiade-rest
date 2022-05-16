@@ -1,8 +1,6 @@
 package net.foxandr.sport.universiade.restapi.lostfound;
 
 import net.foxandr.sport.universiade.restapi.images.ImagesEntity;
-import net.foxandr.sport.universiade.restapi.news.NewsEntity;
-import net.foxandr.sport.universiade.restapi.news.NewsTEntity;
 import net.foxandr.sport.universiade.util.ImageCategories;
 import net.foxandr.sport.universiade.util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,12 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.sql.Date;
-import java.util.ArrayList;
+import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 
@@ -55,7 +50,7 @@ public class LostFoundService {
                                                                 MultipartFile image) {
         UUID uuid = UUID.randomUUID();
         Path path = Paths.get("/images/lost-found/" + uuid + image.getOriginalFilename());
-        Date date = new Date(new java.util.Date().getTime());
+        Instant date = Instant.now();
 
         LostFoundItemsEntity lostFoundItemsEntity = new LostFoundItemsEntity(
                 lostFoundDTO.getItemDescription(),

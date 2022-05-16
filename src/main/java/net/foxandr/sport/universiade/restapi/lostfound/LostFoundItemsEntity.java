@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import net.foxandr.sport.universiade.restapi.images.ImagesEntity;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.time.Instant;
 import java.util.Objects;
 
 @Entity
@@ -31,7 +31,7 @@ public class LostFoundItemsEntity {
     private Boolean isFound;
 
     @Column(name = "created_on")
-    private Date createdOn;
+    private Instant createdOn;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
@@ -41,6 +41,7 @@ public class LostFoundItemsEntity {
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "lostFoundItemsEntity", fetch = FetchType.LAZY)
     @JsonManagedReference
     private LostFoundRequestsEntity lostFoundRequestsEntity;
+
 
     public Long getId() {
         return id;
@@ -90,11 +91,11 @@ public class LostFoundItemsEntity {
         this.isFound = isFound;
     }
 
-    public Date getCreatedOn() {
+    public Instant getCreatedOn() {
         return createdOn;
     }
 
-    public void setCreatedOn(Date createdOn) {
+    public void setCreatedOn(Instant createdOn) {
         this.createdOn = createdOn;
     }
 
@@ -128,7 +129,7 @@ public class LostFoundItemsEntity {
     }
 
     public LostFoundItemsEntity(String itemDescription, String lostItemArea, String cityName, Boolean isRequest,
-                                Boolean isFound, Date createdOn, ImagesEntity imagesEntity) {
+                                Boolean isFound, Instant createdOn, ImagesEntity imagesEntity) {
         this.itemDescription = itemDescription;
         this.lostItemArea = lostItemArea;
         this.cityName = cityName;
@@ -136,5 +137,9 @@ public class LostFoundItemsEntity {
         this.isFound = isFound;
         this.createdOn = createdOn;
         this.imagesEntity = imagesEntity;
+    }
+
+    public LostFoundItemsEntity() {
+
     }
 }

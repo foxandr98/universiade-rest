@@ -2,6 +2,7 @@ package net.foxandr.sport.universiade.restapi.news;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import net.foxandr.sport.universiade.restapi.LanguagesEntity;
 import org.hibernate.annotations.GenericGenerator;
