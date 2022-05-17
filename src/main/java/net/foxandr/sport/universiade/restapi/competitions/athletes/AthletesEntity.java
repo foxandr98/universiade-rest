@@ -2,6 +2,7 @@ package net.foxandr.sport.universiade.restapi.competitions.athletes;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import net.foxandr.sport.universiade.restapi.competitions.participants.ParticipantsEntity;
 
@@ -13,6 +14,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "athletes", schema = "universiade")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class AthletesEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -24,7 +26,7 @@ public class AthletesEntity {
     @Basic
     @Column(name = "birhday_date")
     private Date birthdayDate;
-    @OneToMany(mappedBy = "athletesEntity", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "id.athletesEntity", fetch = FetchType.LAZY)
     private List<AthletesTEntity> athletesTEntities;
 
 //    @OneToMany(mappedBy = "athletesEntity")

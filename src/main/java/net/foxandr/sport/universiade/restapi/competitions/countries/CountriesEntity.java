@@ -1,28 +1,40 @@
 package net.foxandr.sport.universiade.restapi.competitions.countries;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import net.foxandr.sport.universiade.restapi.competitions.games.GamesEntity;
 import net.foxandr.sport.universiade.restapi.competitions.universities.UniversitiesEntity;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name = "countries", schema = "universiade")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class CountriesEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
     private Long id;
-    @Basic
+
     @Column(name = "ioc_name")
     private String iocName;
-    @OneToMany(mappedBy = "countriesById")
-    private Collection<CountriesTEntity> countriesTSById;
+
+    @OneToMany(mappedBy = "id.countriesEntity")
+    @JsonManagedReference
+    private List<CountriesTEntity> countriesTEntities;
+
+    @OneToMany(mappedBy = "countriesEntity", fetch = FetchType.LAZY)
+    @JsonBackReference
+    private List<GamesEntity> gamesById;
+
 //    @OneToMany(mappedBy = "countriesByCountryId")
-//    private Collection<GamesEntity> gamesById;
-    @OneToMany(mappedBy = "countriesByCountryId")
-    private Collection<UniversitiesEntity> universitiesById;
+//    private List<UniversitiesEntity> universitiesById;
 
     public Long getId() {
         return id;
@@ -53,27 +65,28 @@ public class CountriesEntity {
         return Objects.hash(id, iocName);
     }
 
-    public Collection<CountriesTEntity> getCountriesTSById() {
-        return countriesTSById;
+    public List<CountriesTEntity> getCountriesTEntities() {
+        return countriesTEntities;
     }
 
-    public void setCountriesTSById(Collection<CountriesTEntity> countriesTSById) {
-        this.countriesTSById = countriesTSById;
+    public void setCountriesTEntities(List<CountriesTEntity> countriesTEntities) {
+        this.countriesTEntities = countriesTEntities;
     }
 
-//    public Collection<GamesEntity> getGamesById() {
-//        return gamesById;
+    //    public List<UniversitiesEntity> getUniversitiesById() {
+//        return universitiesById;
 //    }
 //
-//    public void setGamesById(Collection<GamesEntity> gamesById) {
-//        this.gamesById = gamesById;
+//    public void setUniversitiesById(List<UniversitiesEntity> universitiesById) {
+//        this.universitiesById = universitiesById;
 //    }
 
-    public Collection<UniversitiesEntity> getUniversitiesById() {
-        return universitiesById;
+
+    public List<GamesEntity> getGamesById() {
+        return gamesById;
     }
 
-    public void setUniversitiesById(Collection<UniversitiesEntity> universitiesById) {
-        this.universitiesById = universitiesById;
+    public void setGamesById(List<GamesEntity> gamesById) {
+        this.gamesById = gamesById;
     }
 }

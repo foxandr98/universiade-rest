@@ -11,17 +11,12 @@ import javax.persistence.*;
 @Table(name = "games_t")
 public class GamesTEntity {
     @EmbeddedId
-    private GamesTEntityPK gamesTEntityPK;
+    @JsonIgnore
+    private GamesTEntityPK id;
     @Column(name = "name")
     private String name;
     @Column(name = "city_name")
     private String cityName;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("gameId")
-    @JoinColumn(name = "id")
-    @JsonBackReference
-    private GamesEntity gamesEntity;
 
     public String getName() {
         return name;
@@ -39,20 +34,12 @@ public class GamesTEntity {
         this.cityName = cityName;
     }
 
-    public GamesTEntityPK getGamesTEntityPK() {
-        return gamesTEntityPK;
+    public GamesTEntityPK getId() {
+        return id;
     }
 
-    public void setGamesTEntityPK(GamesTEntityPK gamesTEntityPK) {
-        this.gamesTEntityPK = gamesTEntityPK;
-    }
-
-    public GamesEntity getGamesEntity() {
-        return gamesEntity;
-    }
-
-    public void setGamesEntity(GamesEntity gamesEntity) {
-        this.gamesEntity = gamesEntity;
+    public void setId(GamesTEntityPK id) {
+        this.id = id;
     }
 
     public GamesTEntity(String name, String cityName) {

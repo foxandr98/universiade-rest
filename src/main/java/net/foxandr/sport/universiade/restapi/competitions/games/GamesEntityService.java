@@ -1,11 +1,28 @@
 package net.foxandr.sport.universiade.restapi.competitions.games;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
+import java.util.stream.Collectors;
 
-public interface GamesEntityService {
-    GamesEntityInfoDTO findGamesEntityByLocaleAndId(String locale, Long id);
-    List<GamesEntityInfoDTO> findGamesEntitiesByLocale(String locale);
+@Service
+public class GamesEntityService {
 
-//    List<GamesEntity> findParticipantsEntitiesByGameIdAndLocale(Long gameId, String locale);
+    GamesEntityRepository gamesEntityRepository;
+    @Autowired
+    public GamesEntityService(GamesEntityRepository gamesEntityRepository) {
+        this.gamesEntityRepository = gamesEntityRepository;
+    }
+
+    public List<GamesEntity> findGamesEntitiesByLocale(String locale){
+        return gamesEntityRepository.findGamesEntitiesByLocale(locale);
+
+    }
+
+    public GamesEntity findGamesEntityByLocaleAndId(String locale, Long id){
+        return gamesEntityRepository.findGamesEntityByLocaleAndId(locale, id);
+    }
+
 
 }

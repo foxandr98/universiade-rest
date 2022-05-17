@@ -9,7 +9,9 @@ public interface VolunteersScheduleRepository extends JpaRepository<VolunteersSc
 
     @Query("SELECT s FROM VolunteersScheduleEntity s " +
             "LEFT JOIN FETCH s.usersEntity u " +
-            "WHERE u.userName = :userName")
-    List<VolunteersScheduleEntity> findAllSchedulesByUserName(String userName);
+            "JOIN FETCH s.venueEntity v " +
+            "JOIN FETCH v.venuesTEntities vt " +
+            "WHERE u.userName = :userName AND vt.id.locale = :locale")
+    List<VolunteersScheduleEntity> findAllSchedulesByUserName(String userName, String locale);
 
 }

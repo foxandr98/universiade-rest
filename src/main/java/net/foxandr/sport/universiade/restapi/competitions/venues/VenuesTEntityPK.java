@@ -1,4 +1,4 @@
-package net.foxandr.sport.universiade.restapi.competitions.games;
+package net.foxandr.sport.universiade.restapi.competitions.venues;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -7,12 +7,21 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Embeddable
-public class GamesTEntityPK implements Serializable {
+public class VenuesTEntityPK implements Serializable {
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id")
-    @JsonBackReference
-    private GamesEntity gamesEntity;
+    private VenuesEntity venuesEntity;
+    @Column(name = "locale")
     private String locale;
+
+    public VenuesEntity getId() {
+        return venuesEntity;
+    }
+
+    public void setId(VenuesEntity venuesEntity) {
+        this.venuesEntity = venuesEntity;
+    }
 
     public String getLocale() {
         return locale;
@@ -26,20 +35,12 @@ public class GamesTEntityPK implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        GamesTEntityPK that = (GamesTEntityPK) o;
-        return gamesEntity == that.gamesEntity && Objects.equals(locale, that.locale);
+        VenuesTEntityPK that = (VenuesTEntityPK) o;
+        return Objects.equals(venuesEntity, that.venuesEntity) && Objects.equals(locale, that.locale);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(gamesEntity, locale);
-    }
-
-    public GamesEntity getGamesEntity() {
-        return gamesEntity;
-    }
-
-    public void setGamesEntity(GamesEntity gamesEntity) {
-        this.gamesEntity = gamesEntity;
+        return Objects.hash(venuesEntity, locale);
     }
 }

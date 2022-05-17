@@ -29,14 +29,7 @@ public class ImagesEntity {
     public void setCreatedOn(Instant createdOn) {
         this.createdOn = createdOn;
     }
-//    @OneToOne(mappedBy = "imagesEntity", fetch = FetchType.LAZY)
-//    @JsonBackReference
-//    private LostFoundItemsEntity lostFoundItemsEntity;
-//
-//
-//    @OneToOne(mappedBy = "imagesEntity", fetch = FetchType.LAZY)
-//    @JsonBackReference
-//    private NewsEntity newsEntity;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonManagedReference
     @JoinColumn(name = "img_category_id", updatable = false, insertable = false)
@@ -78,23 +71,6 @@ public class ImagesEntity {
     public int hashCode() {
         return Objects.hash(uuid, imgRef);
     }
-
-//    public LostFoundItemsEntity getLostFoundItemsEntity() {
-//        return lostFoundItemsEntity;
-//    }
-//
-//    public void setLostFoundItemsEntity(LostFoundItemsEntity lostFoundItemsEntity) {
-//        this.lostFoundItemsEntity = lostFoundItemsEntity;
-//    }
-//
-//    public NewsEntity getNewsEntity() {
-//        return newsEntity;
-//    }
-//
-//    public void setNewsEntity(NewsEntity newsEntity) {
-//        this.newsEntity = newsEntity;
-//    }
-
 
     public ImagesEntity() {
     }

@@ -3,6 +3,7 @@ package net.foxandr.sport.universiade.restapi.users.schedule;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import net.foxandr.sport.universiade.restapi.competitions.venues.VenuesEntity;
 import net.foxandr.sport.universiade.restapi.users.users.UsersEntity;
 
 import javax.persistence.*;
@@ -17,8 +18,11 @@ public class VolunteersScheduleEntity {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "venue_id")
-    private Long venueId;
+
+    @ManyToOne
+    @JoinColumn(name = "venue_id")
+    @JsonManagedReference
+    private VenuesEntity venueEntity;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -39,12 +43,12 @@ public class VolunteersScheduleEntity {
         this.id = id;
     }
 
-    public Long getVenueId() {
-        return venueId;
+    public VenuesEntity getVenueEntity() {
+        return venueEntity;
     }
 
-    public void setVenueId(Long venueId) {
-        this.venueId = venueId;
+    public void setVenueEntity(VenuesEntity venueEntity) {
+        this.venueEntity = venueEntity;
     }
 
     public Instant getUtcHelpTime() {
@@ -68,12 +72,12 @@ public class VolunteersScheduleEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         VolunteersScheduleEntity that = (VolunteersScheduleEntity) o;
-        return Objects.equals(id, that.id) && Objects.equals(venueId, that.venueId) && Objects.equals(utcHelpTime, that.utcHelpTime) && Objects.equals(toDoList, that.toDoList);
+        return Objects.equals(id, that.id) && Objects.equals(venueEntity, that.venueEntity) && Objects.equals(utcHelpTime, that.utcHelpTime) && Objects.equals(toDoList, that.toDoList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, venueId, utcHelpTime, toDoList);
+        return Objects.hash(id, venueEntity, utcHelpTime, toDoList);
     }
 
     public UsersEntity getUsersEntity() {

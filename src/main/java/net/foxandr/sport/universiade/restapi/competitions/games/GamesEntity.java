@@ -1,11 +1,13 @@
 package net.foxandr.sport.universiade.restapi.competitions.games;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import net.foxandr.sport.universiade.restapi.competitions.countries.CountriesEntity;
 import net.foxandr.sport.universiade.restapi.competitions.participants.ParticipantsEntity;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.IndexColumn;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -14,6 +16,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "games")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class GamesEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -28,27 +31,30 @@ public class GamesEntity {
 
     @Column(name = "is_summer")
     private Boolean isSummer;
+
+    @OneToMany(mappedBy = "id.gamesEntity")
     @JsonManagedReference
-    @OneToMany(mappedBy = "gamesEntity")
     private List<GamesTEntity> gamesTEntities;
 
-    public List<ParticipantsEntity> getParticipantsEntities() {
-        return participantsEntities;
-    }
-
-    public void setParticipantsEntities(List<ParticipantsEntity> participantsEntities) {
-        this.participantsEntities = participantsEntities;
-    }
-
-    @OneToMany(mappedBy = "gamesEntity")
+    @ManyToOne
+    @JoinColumn(name = "country_id")
     @JsonManagedReference
-    private List<ParticipantsEntity> participantsEntities;
+    private CountriesEntity countriesEntity;
 
 
+//    @OneToMany(mappedBy = "gamesEntity")
+//    @JsonManagedReference
+//    private List<ParticipantsEntity> participantsEntities;
+//
 
-//    @ManyToOne
-//    @JoinColumn(name = "country_id")
-//    private CountriesEntity countriesByCountryId;
+
+//    public List<ParticipantsEntity> getParticipantsEntities() {
+//        return participantsEntities;
+//    }
+//
+//    public void setParticipantsEntities(List<ParticipantsEntity> participantsEntities) {
+//        this.participantsEntities = participantsEntities;
+//    }
 
     public Long getId() {
         return id;
@@ -120,4 +126,11 @@ public class GamesEntity {
     }
     public GamesEntity() { }
 
+    public CountriesEntity getCountriesEntity() {
+        return countriesEntity;
+    }
+
+    public void setCountriesEntity(CountriesEntity countriesEntity) {
+        this.countriesEntity = countriesEntity;
+    }
 }

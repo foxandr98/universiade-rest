@@ -1,30 +1,33 @@
 package net.foxandr.sport.universiade.restapi.competitions.countries;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
+@Embeddable
 public class CountriesTEntityPK implements Serializable {
-    private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id")
+    @JsonBackReference
+    private CountriesEntity countriesEntity;
+
     private String locale;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getLocale() {
         return locale;
     }
-
     public void setLocale(String locale) {
         this.locale = locale;
+    }
+
+    public CountriesEntity getCountriesEntity() {
+        return countriesEntity;
+    }
+
+    public void setCountriesEntity(CountriesEntity countriesEntity) {
+        this.countriesEntity = countriesEntity;
     }
 
     @Override
@@ -32,11 +35,11 @@ public class CountriesTEntityPK implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CountriesTEntityPK that = (CountriesTEntityPK) o;
-        return Objects.equals(id, that.id) && Objects.equals(locale, that.locale);
+        return Objects.equals(countriesEntity, that.countriesEntity) && Objects.equals(locale, that.locale);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, locale);
+        return Objects.hash(countriesEntity, locale);
     }
 }
