@@ -13,6 +13,7 @@ import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "games")
@@ -34,7 +35,7 @@ public class GamesEntity {
 
     @OneToMany(mappedBy = "id.gamesEntity")
     @JsonManagedReference
-    private List<GamesTEntity> gamesTEntities;
+    private Set<GamesTEntity> gamesTEntities;
 
     @ManyToOne
     @JoinColumn(name = "country_id")
@@ -101,11 +102,11 @@ public class GamesEntity {
         return Objects.hash(id, codeName, gameYear, isSummer);
     }
 
-    public List<GamesTEntity> getGamesTEntities() {
+    public Set<GamesTEntity> getGamesTEntities() {
         return gamesTEntities;
     }
 
-    public void setGamesTEntities(List<GamesTEntity> gamesTEntities) {
+    public void setGamesTEntities(Set<GamesTEntity> gamesTEntities) {
         this.gamesTEntities = gamesTEntities;
     }
 
@@ -117,7 +118,7 @@ public class GamesEntity {
 //        this.countriesByCountryId = countriesByCountryId;
 //    }
 
-    public GamesEntity(Long id, String codeName, Short gameYear, Boolean isSummer, List<GamesTEntity> gamesTEntities) {
+    public GamesEntity(Long id, String codeName, Short gameYear, Boolean isSummer, Set<GamesTEntity> gamesTEntities) {
         this.id = id;
         this.codeName = codeName;
         this.gameYear = gameYear;

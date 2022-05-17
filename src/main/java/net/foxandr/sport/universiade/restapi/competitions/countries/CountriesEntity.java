@@ -12,6 +12,7 @@ import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "countries", schema = "universiade")
@@ -27,7 +28,7 @@ public class CountriesEntity {
 
     @OneToMany(mappedBy = "id.countriesEntity")
     @JsonManagedReference
-    private List<CountriesTEntity> countriesTEntities;
+    private Set<CountriesTEntity> countriesTEntities;
 
     @OneToMany(mappedBy = "countriesEntity", fetch = FetchType.LAZY)
     @JsonBackReference
@@ -65,11 +66,11 @@ public class CountriesEntity {
         return Objects.hash(id, iocName);
     }
 
-    public List<CountriesTEntity> getCountriesTEntities() {
+    public Set<CountriesTEntity> getCountriesTEntities() {
         return countriesTEntities;
     }
 
-    public void setCountriesTEntities(List<CountriesTEntity> countriesTEntities) {
+    public void setCountriesTEntities(Set<CountriesTEntity> countriesTEntities) {
         this.countriesTEntities = countriesTEntities;
     }
 
