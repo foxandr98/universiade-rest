@@ -1,43 +1,59 @@
 package net.foxandr.sport.universiade.configs;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    UserDetailsService userDetailsService;
+
+    @Override
+    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth
+                .userDetailsService(userDetailsService);
+//                .passwordEncoder(passwordEncoder());
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable();
         http
+                .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/**").permitAll()
-                .anyRequest()
-                .authenticated();
+                .antMatchers("/api/v1/{path:(?!(admin|volunteer)).*}/**").permitAll()
+                .antMatchers("/api/v1/admin/**").hasRole("АДМИН")
+                .antMatchers("/api/v1/volunteer/**").hasRole("ВОЛОНТЕР")
+                .anyRequest().authenticated()
+                .and()
+                .httpBasic()
+                .and()
+                .formLogin().disable();
+
+//        http
+//                .csrf().disable()
+//                .authorizeRequests()
+////                .antMatchers("/api/v1/{path:^(?!(admin|volunteer))}.*$/**").permitAll()
+//                .antMatchers("/api/v1/admin/**").hasRole("АДМИН")
+//                .antMatchers("/api/v1/volunteer/**").hasRole("ВОЛОНТЕР")
+//                .anyRequest().authenticated()
+//                .and()
+//                .httpBasic()
+//                .and()
+//                .formLogin().disable();
     }
 
     @Bean
-    @Override
-    protected UserDetailsService userDetailsService() {
-        return new InMemoryUserDetailsManager((
-                User.builder()
-                        .username("admin")
-                        .password(passwordEncoder().encode("admin"))
-                        .roles("ADMIN")
-                        .build()
-                ));
-    }
-
-    @Bean
-    protected PasswordEncoder passwordEncoder(){
+    protected PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(12);
     }
 }

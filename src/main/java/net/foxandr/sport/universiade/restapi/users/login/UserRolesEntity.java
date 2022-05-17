@@ -1,4 +1,4 @@
-package net.foxandr.sport.universiade.restapi.staff.login;
+package net.foxandr.sport.universiade.restapi.users.login;
 
 import javax.persistence.*;
 import java.util.Objects;

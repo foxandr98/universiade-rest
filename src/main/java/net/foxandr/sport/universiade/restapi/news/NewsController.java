@@ -24,7 +24,7 @@ public class NewsController {
     }
 
 
-    @PostMapping("/news")
+    @PostMapping("/admin/news")
     public NewsEntity createNewNewsEntity(@RequestPart ArrayList<NewsEntityDTO> localedList,
                                           @RequestPart MultipartFile imageFile) {
         return newsEntityService.createNewNewsEntity(localedList, imageFile);

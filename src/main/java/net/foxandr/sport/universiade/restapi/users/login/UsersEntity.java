@@ -1,22 +1,17 @@
-package net.foxandr.sport.universiade.restapi.staff.login;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import net.foxandr.sport.universiade.restapi.staff.schedule.VolunteersScheduleEntity;
-
+package net.foxandr.sport.universiade.restapi.users.login;
 import javax.persistence.*;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "staff", schema = "universiade")
-public class StaffEntity {
+@Table(name = "users", schema = "universiade")
+public class UsersEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "login_name")
-    private String loginName;
+    @Column(name = "username")
+    private String userName;
 
     @Column(name = "password_hash")
     private String passwordHash;
@@ -34,9 +29,9 @@ public class StaffEntity {
     @JoinColumn(name = "role_id")
     private UserRolesEntity userRolesEntity;
 
-    @OneToMany(mappedBy = "staffEntity")
-    @JsonManagedReference
-    private List<VolunteersScheduleEntity> volunteersSchedulesEntities;
+//    @OneToMany(mappedBy = "usersEntity")
+//    @JsonManagedReference
+//    private List<VolunteersScheduleEntity> volunteersSchedulesEntities;
 
     public Long getId() {
         return id;
@@ -46,12 +41,12 @@ public class StaffEntity {
         this.id = id;
     }
 
-    public String getLoginName() {
-        return loginName;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setLoginName(String loginName) {
-        this.loginName = loginName;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPasswordHash() {
@@ -90,13 +85,13 @@ public class StaffEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        StaffEntity that = (StaffEntity) o;
-        return Objects.equals(id, that.id) && Objects.equals(loginName, that.loginName) && Objects.equals(passwordHash, that.passwordHash) && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName)  && Objects.equals(isActive, that.isActive);
+        UsersEntity that = (UsersEntity) o;
+        return Objects.equals(id, that.id) && Objects.equals(userName, that.userName) && Objects.equals(passwordHash, that.passwordHash) && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName)  && Objects.equals(isActive, that.isActive);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, loginName, passwordHash, firstName, lastName, isActive);
+        return Objects.hash(id, userName, passwordHash, firstName, lastName, isActive);
     }
 
     public UserRolesEntity getUserRolesEntity() {
@@ -106,14 +101,4 @@ public class StaffEntity {
     public void setUserRolesEntity(UserRolesEntity userRolesEntity) {
         this.userRolesEntity = userRolesEntity;
     }
-
-    public List<VolunteersScheduleEntity> getVolunteersSchedulesEntities() {
-        return volunteersSchedulesEntities;
-    }
-
-    public void setVolunteersSchedulesEntities(List<VolunteersScheduleEntity> volunteersSchedulesEntities) {
-        this.volunteersSchedulesEntities = volunteersSchedulesEntities;
-    }
-
-
 }
