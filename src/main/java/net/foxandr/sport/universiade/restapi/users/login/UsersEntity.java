@@ -29,6 +29,7 @@ public class UsersEntity {
     @JoinColumn(name = "role_id")
     private UserRolesEntity userRolesEntity;
 
+
 //    @OneToMany(mappedBy = "usersEntity")
 //    @JsonManagedReference
 //    private List<VolunteersScheduleEntity> volunteersSchedulesEntities;

@@ -22,34 +22,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
                 .userDetailsService(userDetailsService);
-//                .passwordEncoder(passwordEncoder());
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable();
         http
-                .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/api/v1/{path:(?!(admin|volunteer)).*}/**").permitAll()
                 .antMatchers("/api/v1/admin/**").hasRole("АДМИН")
                 .antMatchers("/api/v1/volunteer/**").hasRole("ВОЛОНТЕР")
-                .anyRequest().authenticated()
+                .anyRequest()
+                .permitAll()
                 .and()
                 .httpBasic()
                 .and()
-                .formLogin().disable();
-
-//        http
-//                .csrf().disable()
-//                .authorizeRequests()
-////                .antMatchers("/api/v1/{path:^(?!(admin|volunteer))}.*$/**").permitAll()
-//                .antMatchers("/api/v1/admin/**").hasRole("АДМИН")
-//                .antMatchers("/api/v1/volunteer/**").hasRole("ВОЛОНТЕР")
-//                .anyRequest().authenticated()
-//                .and()
-//                .httpBasic()
-//                .and()
-//                .formLogin().disable();
+                .formLogin().disable()
+                .logout()
+                .logoutUrl("/logout");
     }
 
     @Bean

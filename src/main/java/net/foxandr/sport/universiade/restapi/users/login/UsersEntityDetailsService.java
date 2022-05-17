@@ -1,7 +1,5 @@
-package net.foxandr.sport.universiade.restapi.users.login.auth;
+package net.foxandr.sport.universiade.restapi.users.login;
 
-import net.foxandr.sport.universiade.restapi.users.login.UsersEntity;
-import net.foxandr.sport.universiade.restapi.users.login.UsersEntityRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

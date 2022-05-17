@@ -1,6 +1,5 @@
-package net.foxandr.sport.universiade.restapi.users.login.auth;
+package net.foxandr.sport.universiade.restapi.users.login;
 
-import net.foxandr.sport.universiade.restapi.users.login.UsersEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
