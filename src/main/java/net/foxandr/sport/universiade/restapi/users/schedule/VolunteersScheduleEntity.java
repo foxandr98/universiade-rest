@@ -1,8 +1,9 @@
 package net.foxandr.sport.universiade.restapi.users.schedule;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import net.foxandr.sport.universiade.restapi.users.login.UsersEntity;
+import net.foxandr.sport.universiade.restapi.users.users.UsersEntity;
 
 import javax.persistence.*;
 import java.time.Instant;
@@ -21,7 +22,7 @@ public class VolunteersScheduleEntity {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    @JsonManagedReference
+    @JsonBackReference
     private UsersEntity usersEntity;
 
     @Column(name = "utc_help_time")
@@ -75,11 +76,11 @@ public class VolunteersScheduleEntity {
         return Objects.hash(id, venueId, utcHelpTime, toDoList);
     }
 
-    public UsersEntity getStaffEntity() {
+    public UsersEntity getUsersEntity() {
         return usersEntity;
     }
 
-    public void setStaffEntity(UsersEntity usersEntity) {
+    public void setUsersEntity(UsersEntity usersEntity) {
         this.usersEntity = usersEntity;
     }
 }

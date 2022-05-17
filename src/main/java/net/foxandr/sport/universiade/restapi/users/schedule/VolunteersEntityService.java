@@ -8,7 +8,6 @@ import java.util.List;
 @Service
 public class VolunteersEntityService {
     VolunteersScheduleRepository volunteersScheduleRepository;
-
     @Autowired
     public VolunteersEntityService(VolunteersScheduleRepository volunteersScheduleRepository) {
         this.volunteersScheduleRepository = volunteersScheduleRepository;
@@ -16,9 +15,5 @@ public class VolunteersEntityService {
 
     public List<VolunteersScheduleEntity> findAllSchedulesByUserName(String userName){
         return volunteersScheduleRepository.findAllSchedulesByUserName(userName);
-//        List<VolunteersScheduleEntity> scheduleEntities =  volunteerScheduleRepository.findAllSchedulesByUserName(userName);
-//        for(VolunteersScheduleEntity schedule : scheduleEntities){
-//
-//        }
     }
 }

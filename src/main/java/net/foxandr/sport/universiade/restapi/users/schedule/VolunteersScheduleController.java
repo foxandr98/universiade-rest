@@ -1,5 +1,6 @@
 package net.foxandr.sport.universiade.restapi.users.schedule;
 
+import net.foxandr.sport.universiade.restapi.users.users.UsersEntityDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,5 +24,4 @@ public class VolunteersScheduleController {
     public List<VolunteersScheduleEntity> getScheduleByUsername(@PathVariable(name = "userName") String userName){
         return volunteersEntityService.findAllSchedulesByUserName(userName);
     }
-
 }

@@ -8,7 +8,7 @@ import java.util.List;
 public interface VolunteersScheduleRepository extends JpaRepository<VolunteersScheduleEntity, Long> {
 
     @Query("SELECT s FROM VolunteersScheduleEntity s " +
-            "JOIN FETCH s.usersEntity u " +
+            "LEFT JOIN FETCH s.usersEntity u " +
             "WHERE u.userName = :userName")
     List<VolunteersScheduleEntity> findAllSchedulesByUserName(String userName);
 

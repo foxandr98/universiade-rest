@@ -1,4 +1,4 @@
-package net.foxandr.sport.universiade.restapi.users.login;
+package net.foxandr.sport.universiade.restapi.users.users;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

@@ -1,4 +1,4 @@
-package net.foxandr.sport.universiade.restapi.users.login;
+package net.foxandr.sport.universiade.restapi.users.users;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,10 +18,4 @@ public class UsersEntityController {
     public UsersEntity getStaffEntityByLogin(@PathVariable("login") String login){
         return usersEntityDetailsService.getByLogin(login);
     }
-
-//    @PostMapping("/login")
-//    public UsersEntity loginAndGetToken(){
-//        return usersEntityDetailsService.getByLogin();
-//    }
-
 }

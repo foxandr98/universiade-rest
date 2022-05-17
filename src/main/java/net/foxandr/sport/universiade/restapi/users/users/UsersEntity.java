@@ -1,5 +1,10 @@
-package net.foxandr.sport.universiade.restapi.users.login;
+package net.foxandr.sport.universiade.restapi.users.users;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import net.foxandr.sport.universiade.restapi.users.schedule.VolunteersScheduleEntity;
+import net.foxandr.sport.universiade.restapi.users.users.roles.UserRolesEntity;
+
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -30,9 +35,9 @@ public class UsersEntity {
     private UserRolesEntity userRolesEntity;
 
 
-//    @OneToMany(mappedBy = "usersEntity")
-//    @JsonManagedReference
-//    private List<VolunteersScheduleEntity> volunteersSchedulesEntities;
+    @OneToMany(mappedBy = "usersEntity")
+    @JsonManagedReference
+    private List<VolunteersScheduleEntity> volunteersSchedulesEntities;
 
     public Long getId() {
         return id;
@@ -101,5 +106,13 @@ public class UsersEntity {
 
     public void setUserRolesEntity(UserRolesEntity userRolesEntity) {
         this.userRolesEntity = userRolesEntity;
+    }
+
+    public List<VolunteersScheduleEntity> getVolunteersSchedulesEntities() {
+        return volunteersSchedulesEntities;
+    }
+
+    public void setVolunteersSchedulesEntities(List<VolunteersScheduleEntity> volunteersSchedulesEntities) {
+        this.volunteersSchedulesEntities = volunteersSchedulesEntities;
     }
 }
