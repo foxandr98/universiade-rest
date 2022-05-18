@@ -19,12 +19,12 @@ public class VolunteersScheduleEntity {
     private Long id;
 
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "venue_id")
     @JsonManagedReference
     private VenuesEntity venueEntity;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     @JsonBackReference
     private UsersEntity usersEntity;

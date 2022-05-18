@@ -34,11 +34,6 @@ public class UsersEntity {
     @JoinColumn(name = "role_id")
     private UserRolesEntity userRolesEntity;
 
-
-    @OneToMany(mappedBy = "usersEntity")
-    @JsonManagedReference
-    private List<VolunteersScheduleEntity> volunteersSchedulesEntities;
-
     public Long getId() {
         return id;
     }
@@ -108,11 +103,4 @@ public class UsersEntity {
         this.userRolesEntity = userRolesEntity;
     }
 
-    public List<VolunteersScheduleEntity> getVolunteersSchedulesEntities() {
-        return volunteersSchedulesEntities;
-    }
-
-    public void setVolunteersSchedulesEntities(List<VolunteersScheduleEntity> volunteersSchedulesEntities) {
-        this.volunteersSchedulesEntities = volunteersSchedulesEntities;
-    }
 }

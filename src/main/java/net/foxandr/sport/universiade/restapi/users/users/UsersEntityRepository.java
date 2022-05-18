@@ -9,7 +9,6 @@ import java.util.Optional;
 public interface UsersEntityRepository extends JpaRepository<UsersEntity, Long> {
     @Query("SELECT u FROM UsersEntity u " +
             "JOIN FETCH u.userRolesEntity ur " +
-            "LEFT JOIN FETCH u.volunteersSchedulesEntities s " +
             "WHERE u.userName = :userName")
     Optional<UsersEntity> findByUserName(String userName);
 }
