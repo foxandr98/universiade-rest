@@ -14,6 +14,7 @@ public class NewsTEntityPK implements Serializable {
     @JoinColumn(name = "id")
     @JsonIgnore
     private NewsEntity newsEntity;
+    @Column(name = "locale")
     private String locale;
 
     public NewsTEntityPK(NewsEntity newsEntity, String locale) {

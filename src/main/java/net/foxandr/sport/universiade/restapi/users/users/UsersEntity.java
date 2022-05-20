@@ -1,9 +1,11 @@
 package net.foxandr.sport.universiade.restapi.users.users;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import net.foxandr.sport.universiade.restapi.users.schedule.VolunteersScheduleEntity;
 import net.foxandr.sport.universiade.restapi.users.users.roles.UserRolesEntity;
 
 import javax.persistence.*;
+import java.time.Instant;
 import java.util.List;
 import java.util.Objects;
 
@@ -19,6 +21,7 @@ public class UsersEntity {
     private String userName;
 
     @Column(name = "password_hash")
+    @JsonIgnore
     private String passwordHash;
 
     @Column(name = "first_name")
@@ -33,6 +36,9 @@ public class UsersEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "role_id")
     private UserRolesEntity userRolesEntity;
+
+    @Column(name = "password_expire_time")
+    private Instant passwordExpireTime;
 
     public Long getId() {
         return id;
@@ -103,4 +109,11 @@ public class UsersEntity {
         this.userRolesEntity = userRolesEntity;
     }
 
+    public Instant getPasswordExpireTime() {
+        return passwordExpireTime;
+    }
+
+    public void setPasswordExpireTime(Instant passwordExpireTime) {
+        this.passwordExpireTime = passwordExpireTime;
+    }
 }

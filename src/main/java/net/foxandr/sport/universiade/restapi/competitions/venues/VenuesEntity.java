@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "venues", schema = "universiade")
@@ -28,7 +29,7 @@ public class VenuesEntity {
     private Boolean forCompetitions;
     @OneToMany(mappedBy = "id.venuesEntity")
     @JsonManagedReference
-    private List<VenuesTEntity> venuesTEntities;
+    private Set<VenuesTEntity> venuesTEntities;
 
     public Long getId() {
         return id;
@@ -75,11 +76,11 @@ public class VenuesEntity {
         return Objects.hash(id, longitude, latitude, forCompetitions);
     }
 
-    public List<VenuesTEntity> getVenuesTEntities() {
+    public Set<VenuesTEntity> getVenuesTEntities() {
         return venuesTEntities;
     }
 
-    public void setVenuesTEntities(List<VenuesTEntity> venuesTEntities) {
+    public void setVenuesTEntities(Set<VenuesTEntity> venuesTEntities) {
         this.venuesTEntities = venuesTEntities;
     }
 }

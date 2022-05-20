@@ -1,6 +1,7 @@
 package net.foxandr.sport.universiade.restapi.competitions.venues;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,6 +12,7 @@ public class VenuesTEntityPK implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id")
+    @JsonBackReference
     private VenuesEntity venuesEntity;
     @Column(name = "locale")
     private String locale;

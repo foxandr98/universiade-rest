@@ -1,5 +1,8 @@
 package net.foxandr.sport.universiade.restapi.competitions.games;
 
+import net.foxandr.sport.universiade.restapi.competitions.games.gamesDTO.GameDTO;
+import net.foxandr.sport.universiade.restapi.competitions.games.gamesDTO.GameDTOList;
+import net.foxandr.sport.universiade.restapi.competitions.games.gamesDTO.GameDTOProjection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,9 +23,23 @@ public class GamesEntityService {
 
     }
 
+    public List<GameDTOProjection> findGamesObjectsByLocale(String locale){
+        return gamesEntityRepository.findGamesObjectsByLocale(locale);
+
+    }
+
     public GamesEntity findGamesEntityByLocaleAndId(String locale, Long id){
         return gamesEntityRepository.findGamesEntityByLocaleAndId(locale, id);
     }
+
+//    public List<GameDTOList> test(String locale){
+//        return gamesEntityRepository.test(locale);
+//    }
+
+//    public GameDTO findGamesEntityById(Long id){
+//        return gamesEntityRepository.findGamesEntitiesById(id);
+//    }
+
 
 
 }

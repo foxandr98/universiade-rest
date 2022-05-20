@@ -32,10 +32,11 @@ public class CountriesEntity {
 
     @OneToMany(mappedBy = "countriesEntity", fetch = FetchType.LAZY)
     @JsonBackReference
-    private List<GamesEntity> gamesById;
+    private Set<GamesEntity> gamesById;
 
-//    @OneToMany(mappedBy = "countriesByCountryId")
-//    private List<UniversitiesEntity> universitiesById;
+    @OneToMany(mappedBy = "countriesByCountryId")
+    @JsonBackReference
+    private List<UniversitiesEntity> universitiesEntities;
 
     public Long getId() {
         return id;
@@ -74,20 +75,20 @@ public class CountriesEntity {
         this.countriesTEntities = countriesTEntities;
     }
 
-    //    public List<UniversitiesEntity> getUniversitiesById() {
-//        return universitiesById;
-//    }
-//
-//    public void setUniversitiesById(List<UniversitiesEntity> universitiesById) {
-//        this.universitiesById = universitiesById;
-//    }
+    public List<UniversitiesEntity> getUniversitiesEntities() {
+        return universitiesEntities;
+    }
+
+    public void setUniversitiesEntities(List<UniversitiesEntity> universitiesEntities) {
+        this.universitiesEntities = universitiesEntities;
+    }
 
 
-    public List<GamesEntity> getGamesById() {
+    public Set<GamesEntity> getGamesById() {
         return gamesById;
     }
 
-    public void setGamesById(List<GamesEntity> gamesById) {
+    public void setGamesById(Set<GamesEntity> gamesById) {
         this.gamesById = gamesById;
     }
 }

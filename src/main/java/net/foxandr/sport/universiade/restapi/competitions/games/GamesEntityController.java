@@ -1,5 +1,8 @@
 package net.foxandr.sport.universiade.restapi.competitions.games;
 
+import net.foxandr.sport.universiade.restapi.competitions.games.gamesDTO.GameDTO;
+import net.foxandr.sport.universiade.restapi.competitions.games.gamesDTO.GameDTOList;
+import net.foxandr.sport.universiade.restapi.competitions.games.gamesDTO.GameDTOProjection;
 import net.foxandr.sport.universiade.restapi.competitions.participants.ParticipantsEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -31,6 +34,49 @@ public class GamesEntityController {
         }
 
     }
+
+    @GetMapping("/gameso")
+    public List<GameDTOProjection> getGamesObjectsByLocale(String locale){
+        try{
+//            return gamesEntityService.findGamesEntitiesByLocale(locale).stream()
+//                    .map(x -> new GamesEntityInfoDTO(x, x.getGamesTEntities().get(0)))
+//                    .collect(Collectors.toList());
+            var a = gamesEntityService.findGamesObjectsByLocale(locale);
+            return a;
+        } catch (Exception ex) {
+            return null;
+        }
+
+    }
+
+
+//    @GetMapping("/gamestest")
+//    public List<GameDTOList> test(String locale){
+//        try{
+//            var a = gamesEntityService.test(locale);
+//            return a;
+//        } catch (Exception ex) {
+//            return null;
+//        }
+//
+//    }
+
+
+
+//    @GetMapping("/gamestest")
+//    public List<GameDTO> getTest(Long id){
+//        var a = gamesEntityService.findGamesEntityById(id);
+//        var b = a.get(0).getCodeName();
+//        return a;
+//    }
+
+//    @GetMapping("/gamestest")
+//    public GameDTO getTest(Long id){
+//        var a = gamesEntityService.findGamesEntityById(id);
+//        var b = a.getCodeName();
+//        var c = a.getIocName();
+//        return a;
+//    }
 
 //    @GetMapping("/games/{id}")
 //    public GamesEntityInfoDTO getGameById(@PathVariable("id") Long id, String locale){

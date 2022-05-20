@@ -24,7 +24,7 @@ public class AthletesController {
     public List<AthletesEntityInfoDTO> getAthletes(String locale){
         try {
             return athletesEntityRepository.findAthletesEntityByLocale(locale).stream()
-                    .map(x -> new AthletesEntityInfoDTO(x, x.getAthletesTEntities().get(0)))
+                    .map(x -> new AthletesEntityInfoDTO(x, x.getAthletesTEntities().iterator().next()))
                     .collect(Collectors.toList());
         } catch (Exception ex) {
             return null;

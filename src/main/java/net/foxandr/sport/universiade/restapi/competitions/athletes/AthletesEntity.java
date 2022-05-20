@@ -11,6 +11,7 @@ import java.sql.Date;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "athletes", schema = "universiade")
@@ -27,7 +28,7 @@ public class AthletesEntity {
     @Column(name = "birhday_date")
     private Date birthdayDate;
     @OneToMany(mappedBy = "id.athletesEntity", fetch = FetchType.LAZY)
-    private List<AthletesTEntity> athletesTEntities;
+    private Set<AthletesTEntity> athletesTEntities;
 
 //    @OneToMany(mappedBy = "athletesEntity")
 //    @JsonBackReference
@@ -70,11 +71,11 @@ public class AthletesEntity {
         return Objects.hash(id, sex, birthdayDate);
     }
 
-    public List<AthletesTEntity> getAthletesTEntities() {
+    public Set<AthletesTEntity> getAthletesTEntities() {
         return athletesTEntities;
     }
 
-    public void setAthletesTSById(List<AthletesTEntity> athletesTEntities) {
+    public void setAthletesTSById(Set<AthletesTEntity> athletesTEntities) {
         this.athletesTEntities = athletesTEntities;
     }
 

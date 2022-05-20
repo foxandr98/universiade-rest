@@ -33,7 +33,7 @@ public class GamesEntity {
     @Column(name = "is_summer")
     private Boolean isSummer;
 
-    @OneToMany(mappedBy = "id.gamesEntity")
+    @OneToMany(mappedBy = "id.gamesEntity", fetch = FetchType.LAZY)
     @JsonManagedReference
     private Set<GamesTEntity> gamesTEntities;
 

@@ -19,11 +19,11 @@ public class ParticipantsEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
-    private Integer id;
-    @Basic
+    private Long id;
+
     @Column(name = "height")
     private Short height;
-    @Basic
+
     @Column(name = "weight")
     private Short weight;
     @ManyToOne
@@ -38,11 +38,11 @@ public class ParticipantsEntity {
     @JoinColumn(name = "athlete_id")
     private AthletesEntity athletesEntity;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

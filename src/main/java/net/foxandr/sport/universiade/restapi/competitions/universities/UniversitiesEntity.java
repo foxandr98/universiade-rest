@@ -1,11 +1,13 @@
 package net.foxandr.sport.universiade.restapi.competitions.universities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import net.foxandr.sport.universiade.restapi.competitions.countries.CountriesEntity;
 import net.foxandr.sport.universiade.restapi.competitions.participants.ParticipantsEntity;
 
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "universities", schema = "universiade")
@@ -14,17 +16,18 @@ public class UniversitiesEntity {
     @Id
     @Column(name = "id")
     private Long id;
-    @Basic
+
     @Column(name = "website")
     private String website;
 
 //    @OneToMany(mappedBy = "universitiesByPlayUniversityId")
 //    private Collection<ParticipantsEntity> participantsById;
     @ManyToOne
-    @JoinColumn(name = "country_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "country_id")
+    @JsonManagedReference
     private CountriesEntity countriesByCountryId;
-    @OneToMany(mappedBy = "universitiesById")
-    private Collection<UniversitiesTEntity> universitiesTSById;
+    @OneToMany(mappedBy = "id.universitiesEntity")
+    private Set<UniversitiesTEntity> universitiesTEntities;
 
     public Long getId() {
         return id;
@@ -71,11 +74,11 @@ public class UniversitiesEntity {
         this.countriesByCountryId = countriesByCountryId;
     }
 
-    public Collection<UniversitiesTEntity> getUniversitiesTSById() {
-        return universitiesTSById;
+    public Set<UniversitiesTEntity> getUniversitiesTEntities() {
+        return universitiesTEntities;
     }
 
-    public void setUniversitiesTSById(Collection<UniversitiesTEntity> universitiesTSById) {
-        this.universitiesTSById = universitiesTSById;
+    public void setUniversitiesTEntities(Set<UniversitiesTEntity> universitiesTSById) {
+        this.universitiesTEntities = universitiesTSById;
     }
 }
