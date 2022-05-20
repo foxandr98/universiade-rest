@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "games_t")
+@Table(name = "games_t", schema = "universiade")
 public class GamesTEntity {
     @EmbeddedId
     @JsonIgnore

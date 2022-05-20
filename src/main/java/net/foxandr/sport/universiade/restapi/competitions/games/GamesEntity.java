@@ -16,7 +16,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "games")
+@Table(name = "games", schema = "universiade")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class GamesEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
