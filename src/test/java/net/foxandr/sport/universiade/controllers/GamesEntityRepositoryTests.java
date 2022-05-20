@@ -13,7 +13,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -29,7 +31,7 @@ public class GamesEntityRepositoryTests {
 
     @Test
     public void getGamesEntityByLocaleAndIdTest() throws Exception{
-        List<GamesTEntity> gameTEntity = new ArrayList<GamesTEntity>();
+        Set<GamesTEntity> gameTEntity = new HashSet<GamesTEntity>();
         gameTEntity.add(new GamesTEntity("Казань", "XXVII Всемирная летняя Универсиада 2013"));
         var gameEntity = new GamesEntity((long) 1, "WSGS2013", (short) 2013, true, gameTEntity);
 
