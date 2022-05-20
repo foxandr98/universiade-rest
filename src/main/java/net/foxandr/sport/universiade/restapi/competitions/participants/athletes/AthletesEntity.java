@@ -1,15 +1,9 @@
-package net.foxandr.sport.universiade.restapi.competitions.athletes;
+package net.foxandr.sport.universiade.restapi.competitions.participants.athletes;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import net.foxandr.sport.universiade.restapi.competitions.participants.ParticipantsEntity;
 
 import javax.persistence.*;
 import java.sql.Date;
-import java.util.Collection;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 

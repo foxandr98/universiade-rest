@@ -1,7 +1,4 @@
-package net.foxandr.sport.universiade.restapi.competitions.athletes;
-
-import net.foxandr.sport.universiade.restapi.competitions.games.GamesEntity;
-import net.foxandr.sport.universiade.restapi.competitions.games.GamesTEntity;
+package net.foxandr.sport.universiade.restapi.competitions.participants.athletes;
 
 import java.sql.Date;
 

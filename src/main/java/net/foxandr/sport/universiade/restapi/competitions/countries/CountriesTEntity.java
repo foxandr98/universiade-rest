@@ -1,7 +1,6 @@
 package net.foxandr.sport.universiade.restapi.competitions.countries;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import net.foxandr.sport.universiade.restapi.LanguagesEntity;
 
 import javax.persistence.*;
 import java.util.Objects;

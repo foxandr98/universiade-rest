@@ -1,11 +1,9 @@
-package net.foxandr.sport.universiade.restapi.competitions.universities;
+package net.foxandr.sport.universiade.restapi.competitions.participants.universities;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import net.foxandr.sport.universiade.restapi.competitions.countries.CountriesEntity;
-import net.foxandr.sport.universiade.restapi.competitions.participants.ParticipantsEntity;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.Objects;
 import java.util.Set;
 

@@ -1,4 +1,4 @@
-package net.foxandr.sport.universiade.restapi.competitions.universities;
+package net.foxandr.sport.universiade.restapi.competitions.participants.universities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 

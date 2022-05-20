@@ -1,15 +1,12 @@
 package net.foxandr.sport.universiade.restapi.competitions.participants;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import net.foxandr.sport.universiade.restapi.competitions.athletes.AthletesEntity;
+import net.foxandr.sport.universiade.restapi.competitions.participants.athletes.AthletesEntity;
 import net.foxandr.sport.universiade.restapi.competitions.games.GamesEntity;
-import net.foxandr.sport.universiade.restapi.competitions.universities.UniversitiesEntity;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.Objects;
 
 @Entity

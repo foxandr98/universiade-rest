@@ -1,11 +1,6 @@
-package net.foxandr.sport.universiade.restapi;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import net.foxandr.sport.universiade.restapi.competitions.athletes.AthletesTEntity;
-import net.foxandr.sport.universiade.restapi.competitions.games.GamesTEntity;
+package net.foxandr.sport.universiade.restapi.languages;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.Objects;
 
 @Entity

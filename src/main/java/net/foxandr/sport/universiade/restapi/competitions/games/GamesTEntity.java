@@ -1,9 +1,6 @@
 package net.foxandr.sport.universiade.restapi.competitions.games;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import net.foxandr.sport.universiade.restapi.LanguagesEntity;
 
 import javax.persistence.*;
 

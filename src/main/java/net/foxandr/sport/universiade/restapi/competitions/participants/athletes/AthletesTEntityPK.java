@@ -1,4 +1,4 @@
-package net.foxandr.sport.universiade.restapi.competitions.athletes;
+package net.foxandr.sport.universiade.restapi.competitions.participants.athletes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

@@ -1,6 +1,5 @@
 package net.foxandr.sport.universiade.restapi.competitions.participants;
 
-import net.foxandr.sport.universiade.restapi.competitions.athletes.AthletesEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

@@ -1,4 +1,4 @@
-package net.foxandr.sport.universiade.restapi.competitions.athletes;
+package net.foxandr.sport.universiade.restapi.competitions.participants.athletes;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
