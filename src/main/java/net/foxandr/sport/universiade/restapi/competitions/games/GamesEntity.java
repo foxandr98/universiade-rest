@@ -117,14 +117,6 @@ public class GamesEntity {
         this.eventsEntities = eventsEntities;
     }
 
-    //    public CountriesEntity getCountriesByCountryId() {
-//        return countriesByCountryId;
-//    }
-//
-//    public void setCountriesByCountryId(CountriesEntity countriesByCountryId) {
-//        this.countriesByCountryId = countriesByCountryId;
-//    }
-
     public GamesEntity(Long id, String codeName, Short gameYear, Boolean isSummer, Set<GamesTEntity> gamesTEntities) {
         this.id = id;
         this.codeName = codeName;
