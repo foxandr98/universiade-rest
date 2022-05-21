@@ -1,14 +1,17 @@
 package net.foxandr.sport.universiade.restapi.competitions.participants;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import net.foxandr.sport.universiade.restapi.competitions.games.events.EventsCompetitorsEntity;
 import net.foxandr.sport.universiade.restapi.competitions.participants.athletes.AthletesEntity;
 import net.foxandr.sport.universiade.restapi.competitions.games.GamesEntity;
 import net.foxandr.sport.universiade.restapi.competitions.participants.universities.UniversitiesEntity;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "participants", schema = "universiade")
@@ -38,6 +41,11 @@ public class ParticipantsEntity {
     @JoinColumn(name = "athlete_id")
     @JsonManagedReference
     private AthletesEntity athletesEntity;
+
+    @OneToMany(mappedBy = "id.participantsEntity", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Set<EventsCompetitorsEntity> eventsCompetitorsEntity;
+
 
     public Long getId() {
         return id;
@@ -98,5 +106,13 @@ public class ParticipantsEntity {
 
     public void setAthletesEntity(AthletesEntity athletesEntity) {
         this.athletesEntity = athletesEntity;
+    }
+
+    public Set<EventsCompetitorsEntity> getEventsCompetitorsEntity() {
+        return eventsCompetitorsEntity;
+    }
+
+    public void setEventsCompetitorsEntity(Set<EventsCompetitorsEntity> eventsCompetitorsEntity) {
+        this.eventsCompetitorsEntity = eventsCompetitorsEntity;
     }
 }

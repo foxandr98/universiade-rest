@@ -1,9 +1,11 @@
 package net.foxandr.sport.universiade.restapi.competitions.games.events;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import net.foxandr.sport.universiade.restapi.competitions.games.events.results.ResultTypesEntity;
+import net.foxandr.sport.universiade.restapi.competitions.participants.ParticipantsEntity;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -27,6 +29,11 @@ public class EventsCompetitorsEntity {
     @JoinColumn(name = "result_type_id")
     @JsonManagedReference
     private ResultTypesEntity resultTypesEntity;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "participant_id", updatable = false, insertable = false)
+    @JsonManagedReference
+    private ParticipantsEntity participantsEntity;
 
     public EventsCompetitorsEntityPK getId() {
         return id;
@@ -72,5 +79,13 @@ public class EventsCompetitorsEntity {
     @Override
     public int hashCode() {
         return Objects.hash(id, partNumber, laneNumber, resultTypesEntity, resultTypesEntity);
+    }
+
+    public ParticipantsEntity getParticipantsEntity() {
+        return participantsEntity;
+    }
+
+    public void setParticipantsEntity(ParticipantsEntity participantsEntity) {
+        this.participantsEntity = participantsEntity;
     }
 }

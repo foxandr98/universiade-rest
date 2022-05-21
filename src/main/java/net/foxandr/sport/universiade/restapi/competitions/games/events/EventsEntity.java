@@ -10,6 +10,7 @@ import net.foxandr.sport.universiade.restapi.competitions.venues.VenuesEntity;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -39,7 +40,7 @@ public class EventsEntity {
     @JoinColumn(name = "game_id")
     @JsonBackReference
     private GamesEntity gamesEntity;
-//
+
     @OneToMany(mappedBy = "id.eventsEntity", fetch = FetchType.LAZY)
     @JsonIgnore
     private Set<EventsCompetitorsEntity> eventsCompetitorsEntity;
@@ -82,15 +83,7 @@ public class EventsEntity {
     public void setVenuesEntity(VenuesEntity venuesEntity) {
         this.venuesEntity = venuesEntity;
     }
-//
-//    public GamesEntity getGamesEntity() {
-//        return gamesEntity;
-//    }
-//
-//    public void setGamesEntity(GamesEntity gamesEntity) {
-//        this.gamesEntity = gamesEntity;
-//    }
-//
+
     public Set<EventsCompetitorsEntity> getEventsCompetitorsEntity() {
         return eventsCompetitorsEntity;
     }
@@ -115,16 +108,24 @@ public class EventsEntity {
         isFinished = finished;
     }
 
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//        EventsEntity that = (EventsEntity) o;
-//        return Objects.equals(id, that.id) && Objects.equals(stagesEntity, that.stagesEntity) && Objects.equals(genderDisciplinesEntity, that.genderDisciplinesEntity) && Objects.equals(venuesEntity, that.venuesEntity) && Objects.equals(gamesEntity, that.gamesEntity) && Objects.equals(eventsCompetitorsEntity, that.eventsCompetitorsEntity) && Objects.equals(utcEventTime, that.utcEventTime) && Objects.equals(isFinished, that.isFinished);
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        return Objects.hash(id, stagesEntity, genderDisciplinesEntity, venuesEntity, gamesEntity, eventsCompetitorsEntity, utcEventTime, isFinished);
-//    }
+    public GamesEntity getGamesEntity() {
+        return gamesEntity;
+    }
+
+    public void setGamesEntity(GamesEntity gamesEntity) {
+        this.gamesEntity = gamesEntity;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        EventsEntity that = (EventsEntity) o;
+        return Objects.equals(id, that.id) && Objects.equals(utcEventTime, that.utcEventTime) && Objects.equals(isFinished, that.isFinished);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, utcEventTime, isFinished);
+    }
 }

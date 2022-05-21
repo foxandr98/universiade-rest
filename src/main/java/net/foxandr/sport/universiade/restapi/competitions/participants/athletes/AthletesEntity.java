@@ -1,6 +1,8 @@
 package net.foxandr.sport.universiade.restapi.competitions.participants.athletes;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import net.foxandr.sport.universiade.restapi.competitions.participants.ParticipantsEntity;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -15,18 +17,18 @@ public class AthletesEntity {
     @Id
     @Column(name = "id")
     private Long id;
-    @Basic
+
     @Column(name = "sex")
     private String sex;
-    @Basic
+
     @Column(name = "birhday_date")
     private Date birthdayDate;
     @OneToMany(mappedBy = "id.athletesEntity", fetch = FetchType.LAZY)
     private Set<AthletesTEntity> athletesTEntities;
 
-//    @OneToMany(mappedBy = "athletesEntity")
-//    @JsonBackReference
-//    private List<ParticipantsEntity> participantsEntities;
+    @OneToMany(mappedBy = "athletesEntity", fetch = FetchType.LAZY)
+    @JsonBackReference
+    private Set<ParticipantsEntity> participantsEntities;
 
     public Long getId() {
         return id;
@@ -73,11 +75,11 @@ public class AthletesEntity {
         this.athletesTEntities = athletesTEntities;
     }
 
-//    public List<ParticipantsEntity> getParticipantsEntities() {
-//        return participantsEntities;
-//    }
-//
-//    public void setParticipantsEntities(List<ParticipantsEntity> participantsEntities) {
-//        this.participantsEntities = participantsEntities;
-//    }
+    public Set<ParticipantsEntity> getParticipantsEntities() {
+        return participantsEntities;
+    }
+
+    public void setParticipantsEntities(Set<ParticipantsEntity> participantsEntities) {
+        this.participantsEntities = participantsEntities;
+    }
 }

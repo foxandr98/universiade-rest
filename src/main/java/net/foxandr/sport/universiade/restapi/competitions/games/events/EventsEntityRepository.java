@@ -9,14 +9,6 @@ import java.util.List;
 
 public interface EventsEntityRepository extends JpaRepository<EventsEntity, Long> {
 
-//    Long getId();
-//    String getStageName();
-//    Long getVenueId();
-//    String getDisciplineName();
-//    Instant getUtcEventTime();
-//    Boolean getIsFinished();
-
-
     @Query("SELECT e.id as id, stt.name as stageName, v.id as venueId,  " +
             "dt.categoryName as disciplineName, d.isIndividual as isIndividual, gd.genderType as genderType, " +
             "e.utcEventTime as utcEventTime, e.isFinished as isFinished " +
@@ -31,7 +23,5 @@ public interface EventsEntityRepository extends JpaRepository<EventsEntity, Long
             "WHERE stt.id.locale = :locale AND dt.id.locale = :locale " +
             "AND g.id = :id")
     List<EventsDTOProjection> findAllEventsByLocaleAndGameId(String locale, Long id);
-
-
 
 }

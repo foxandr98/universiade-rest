@@ -59,12 +59,4 @@ public class ResultTypesEntity {
     public void setResultTypesTEntities(Set<ResultTypesTEntity> resultTypesTEntities) {
         this.resultTypesTEntities = resultTypesTEntities;
     }
-
-    public Boolean getWin() {
-        return isWin;
-    }
-
-    public void setWin(Boolean win) {
-        isWin = win;
-    }
 }
