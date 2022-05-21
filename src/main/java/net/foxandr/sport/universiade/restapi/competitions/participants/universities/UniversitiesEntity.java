@@ -20,7 +20,7 @@ public class UniversitiesEntity {
     @Column(name = "website")
     private String website;
 
-    @OneToMany(mappedBy = "universitiesByPlayUniversityId")
+    @OneToMany(mappedBy = "universitiesEntity")
     @JsonBackReference
     private Set<ParticipantsEntity> participantsEntities;
 

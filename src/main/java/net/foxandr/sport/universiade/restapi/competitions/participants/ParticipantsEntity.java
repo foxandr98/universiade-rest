@@ -31,11 +31,12 @@ public class ParticipantsEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "play_university_id")
-    private UniversitiesEntity universitiesByPlayUniversityId;
+    @JsonManagedReference
+    private UniversitiesEntity universitiesEntity;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonManagedReference
     @JoinColumn(name = "athlete_id")
+    @JsonManagedReference
     private AthletesEntity athletesEntity;
 
     public Long getId() {
@@ -83,12 +84,12 @@ public class ParticipantsEntity {
         this.gamesEntity = gamesEntity;
     }
 
-    public UniversitiesEntity getUniversitiesByPlayUniversityId() {
-        return universitiesByPlayUniversityId;
+    public UniversitiesEntity getUniversitiesEntity() {
+        return universitiesEntity;
     }
 
-    public void setUniversitiesByPlayUniversityId(UniversitiesEntity universitiesByPlayUniversityId) {
-        this.universitiesByPlayUniversityId = universitiesByPlayUniversityId;
+    public void setUniversitiesEntity(UniversitiesEntity universitiesEntity) {
+        this.universitiesEntity = universitiesEntity;
     }
 
     public AthletesEntity getAthletesEntity() {
