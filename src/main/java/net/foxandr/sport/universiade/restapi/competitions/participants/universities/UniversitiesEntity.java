@@ -1,7 +1,9 @@
 package net.foxandr.sport.universiade.restapi.competitions.participants.universities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import net.foxandr.sport.universiade.restapi.competitions.countries.CountriesEntity;
+import net.foxandr.sport.universiade.restapi.competitions.participants.ParticipantsEntity;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -18,13 +20,17 @@ public class UniversitiesEntity {
     @Column(name = "website")
     private String website;
 
-//    @OneToMany(mappedBy = "universitiesByPlayUniversityId")
-//    private Collection<ParticipantsEntity> participantsById;
+    @OneToMany(mappedBy = "universitiesByPlayUniversityId")
+    @JsonBackReference
+    private Set<ParticipantsEntity> participantsEntities;
+
     @ManyToOne
     @JoinColumn(name = "country_id")
     @JsonManagedReference
-    private CountriesEntity countriesByCountryId;
+    private CountriesEntity countriesEntity;
+
     @OneToMany(mappedBy = "id.universitiesEntity")
+    @JsonManagedReference
     private Set<UniversitiesTEntity> universitiesTEntities;
 
     public Long getId() {
@@ -56,20 +62,20 @@ public class UniversitiesEntity {
         return Objects.hash(id, website);
     }
 
-//    public Collection<ParticipantsEntity> getParticipantsById() {
-//        return participantsById;
-//    }
-
-//    public void setParticipantsById(Collection<ParticipantsEntity> participantsById) {
-//        this.participantsById = participantsById;
-//    }
-
-    public CountriesEntity getCountriesByCountryId() {
-        return countriesByCountryId;
+    public Set<ParticipantsEntity> getParticipantsEntities() {
+        return participantsEntities;
     }
 
-    public void setCountriesByCountryId(CountriesEntity countriesByCountryId) {
-        this.countriesByCountryId = countriesByCountryId;
+    public void setParticipantsEntities(Set<ParticipantsEntity> participantsEntities) {
+        this.participantsEntities = participantsEntities;
+    }
+
+    public CountriesEntity getCountriesEntity() {
+        return countriesEntity;
+    }
+
+    public void setCountriesEntity(CountriesEntity countriesEntity) {
+        this.countriesEntity = countriesEntity;
     }
 
     public Set<UniversitiesTEntity> getUniversitiesTEntities() {

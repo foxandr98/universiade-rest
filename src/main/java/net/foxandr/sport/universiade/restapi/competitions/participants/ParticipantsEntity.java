@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import net.foxandr.sport.universiade.restapi.competitions.participants.athletes.AthletesEntity;
 import net.foxandr.sport.universiade.restapi.competitions.games.GamesEntity;
+import net.foxandr.sport.universiade.restapi.competitions.participants.universities.UniversitiesEntity;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -27,10 +28,12 @@ public class ParticipantsEntity {
     @JsonBackReference
     @JoinColumn(name = "game_id")
     private GamesEntity gamesEntity;
-//    @ManyToOne
-//    @JoinColumn(name = "play_university_id", referencedColumnName = "id", nullable = false)
-//    private UniversitiesEntity universitiesByPlayUniversityId;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "play_university_id")
+    private UniversitiesEntity universitiesByPlayUniversityId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonManagedReference
     @JoinColumn(name = "athlete_id")
     private AthletesEntity athletesEntity;
@@ -80,13 +83,13 @@ public class ParticipantsEntity {
         this.gamesEntity = gamesEntity;
     }
 
-//    public UniversitiesEntity getUniversitiesByPlayUniversityId() {
-//        return universitiesByPlayUniversityId;
-//    }
-//
-//    public void setUniversitiesByPlayUniversityId(UniversitiesEntity universitiesByPlayUniversityId) {
-//        this.universitiesByPlayUniversityId = universitiesByPlayUniversityId;
-//    }
+    public UniversitiesEntity getUniversitiesByPlayUniversityId() {
+        return universitiesByPlayUniversityId;
+    }
+
+    public void setUniversitiesByPlayUniversityId(UniversitiesEntity universitiesByPlayUniversityId) {
+        this.universitiesByPlayUniversityId = universitiesByPlayUniversityId;
+    }
 
     public AthletesEntity getAthletesEntity() {
         return athletesEntity;

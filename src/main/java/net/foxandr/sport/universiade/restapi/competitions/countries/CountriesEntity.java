@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import net.foxandr.sport.universiade.restapi.competitions.games.GamesEntity;
+import net.foxandr.sport.universiade.restapi.competitions.games.GamesTEntity;
 import net.foxandr.sport.universiade.restapi.competitions.participants.universities.UniversitiesEntity;
 
 import javax.persistence.*;
@@ -29,11 +30,11 @@ public class CountriesEntity {
 
     @OneToMany(mappedBy = "countriesEntity", fetch = FetchType.LAZY)
     @JsonBackReference
-    private Set<GamesEntity> gamesById;
+    private Set<GamesEntity> gamesEntities;
 
-    @OneToMany(mappedBy = "countriesByCountryId")
+    @OneToMany(mappedBy = "countriesEntities")
     @JsonBackReference
-    private List<UniversitiesEntity> universitiesEntities;
+    private Set<UniversitiesEntity> universitiesEntities;
 
     public Long getId() {
         return id;
@@ -72,20 +73,20 @@ public class CountriesEntity {
         this.countriesTEntities = countriesTEntities;
     }
 
-    public List<UniversitiesEntity> getUniversitiesEntities() {
+    public Set<UniversitiesEntity> getUniversitiesEntities() {
         return universitiesEntities;
     }
 
-    public void setUniversitiesEntities(List<UniversitiesEntity> universitiesEntities) {
+    public void setUniversitiesEntities(Set<UniversitiesEntity> universitiesEntities) {
         this.universitiesEntities = universitiesEntities;
     }
 
 
-    public Set<GamesEntity> getGamesById() {
-        return gamesById;
+    public Set<GamesEntity> getGamesEntities() {
+        return gamesEntities;
     }
 
-    public void setGamesById(Set<GamesEntity> gamesById) {
-        this.gamesById = gamesById;
+    public void setGamesEntities(Set<GamesEntity> gamesEntities) {
+        this.gamesEntities = gamesEntities;
     }
 }
