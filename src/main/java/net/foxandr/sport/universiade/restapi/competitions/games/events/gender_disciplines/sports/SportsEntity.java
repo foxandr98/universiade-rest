@@ -1,8 +1,7 @@
-package net.foxandr.sport.universiade.restapi.competitions.games.events.disciplines.sports;
+package net.foxandr.sport.universiade.restapi.competitions.games.events.gender_disciplines.sports;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import net.foxandr.sport.universiade.restapi.competitions.games.events.stages.StagesTEntity;
 
 import javax.persistence.*;
 import java.util.Objects;

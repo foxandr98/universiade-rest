@@ -1,4 +1,4 @@
-package net.foxandr.sport.universiade.restapi.competitions.games.events.disciplines.sports;
+package net.foxandr.sport.universiade.restapi.competitions.games.events.gender_disciplines.sports;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
