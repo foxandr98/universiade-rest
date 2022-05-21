@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import net.foxandr.sport.universiade.restapi.competitions.countries.CountriesEntity;
+import net.foxandr.sport.universiade.restapi.competitions.games.events.EventsEntity;
 import net.foxandr.sport.universiade.restapi.competitions.participants.ParticipantsEntity;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -37,10 +38,15 @@ public class GamesEntity {
     @JsonManagedReference
     private Set<GamesTEntity> gamesTEntities;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "country_id")
     @JsonManagedReference
     private CountriesEntity countriesEntity;
+
+
+    @OneToMany(mappedBy = "gamesEntity")
+    @JsonManagedReference
+    private Set<EventsEntity> eventsEntities;
 
 
 //    @OneToMany(mappedBy = "gamesEntity")
@@ -110,7 +116,15 @@ public class GamesEntity {
         this.gamesTEntities = gamesTEntities;
     }
 
-//    public CountriesEntity getCountriesByCountryId() {
+    public Set<EventsEntity> getEventsEntities() {
+        return eventsEntities;
+    }
+
+    public void setEventsEntities(Set<EventsEntity> eventsEntities) {
+        this.eventsEntities = eventsEntities;
+    }
+
+    //    public CountriesEntity getCountriesByCountryId() {
 //        return countriesByCountryId;
 //    }
 //

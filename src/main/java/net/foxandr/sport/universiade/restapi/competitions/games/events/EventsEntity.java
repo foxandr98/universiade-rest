@@ -1,5 +1,7 @@
 package net.foxandr.sport.universiade.restapi.competitions.games.events;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import net.foxandr.sport.universiade.restapi.competitions.games.GamesEntity;
 import net.foxandr.sport.universiade.restapi.competitions.games.events.gender_disciplines.GenderDisciplinesEntity;
 import net.foxandr.sport.universiade.restapi.competitions.games.events.stages.StagesEntity;
@@ -9,6 +11,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "events", schema = "universiade")
@@ -18,21 +21,30 @@ public class EventsEntity {
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "stage_id")
+    @JsonBackReference
     private StagesEntity stagesEntity;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "gender_discipline_id")
+    @JsonBackReference
     private GenderDisciplinesEntity genderDisciplinesEntity;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "venue_id")
+    @JsonBackReference
     private VenuesEntity venuesEntity;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "game_id")
+    @JsonBackReference
     private GamesEntity gamesEntity;
+
+    @OneToMany(mappedBy = "id.eventsEntity", fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private Set<EventsCompetitorsEntity> eventsCompetitorsEntity;
+
 
     @Column(name = "utc_event_time")
     private Instant utcEventTime;
@@ -40,4 +52,80 @@ public class EventsEntity {
     @Column(name = "is_finished")
     private Boolean isFinished;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public StagesEntity getStagesEntity() {
+        return stagesEntity;
+    }
+
+    public void setStagesEntity(StagesEntity stagesEntity) {
+        this.stagesEntity = stagesEntity;
+    }
+
+    public GenderDisciplinesEntity getGenderDisciplinesEntity() {
+        return genderDisciplinesEntity;
+    }
+
+    public void setGenderDisciplinesEntity(GenderDisciplinesEntity genderDisciplinesEntity) {
+        this.genderDisciplinesEntity = genderDisciplinesEntity;
+    }
+
+    public VenuesEntity getVenuesEntity() {
+        return venuesEntity;
+    }
+
+    public void setVenuesEntity(VenuesEntity venuesEntity) {
+        this.venuesEntity = venuesEntity;
+    }
+
+    public GamesEntity getGamesEntity() {
+        return gamesEntity;
+    }
+
+    public void setGamesEntity(GamesEntity gamesEntity) {
+        this.gamesEntity = gamesEntity;
+    }
+
+    public Set<EventsCompetitorsEntity> getEventsCompetitorsEntity() {
+        return eventsCompetitorsEntity;
+    }
+
+    public void setEventsCompetitorsEntity(Set<EventsCompetitorsEntity> eventsCompetitorsEntity) {
+        this.eventsCompetitorsEntity = eventsCompetitorsEntity;
+    }
+
+    public Instant getUtcEventTime() {
+        return utcEventTime;
+    }
+
+    public void setUtcEventTime(Instant utcEventTime) {
+        this.utcEventTime = utcEventTime;
+    }
+
+    public Boolean getFinished() {
+        return isFinished;
+    }
+
+    public void setFinished(Boolean finished) {
+        isFinished = finished;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        EventsEntity that = (EventsEntity) o;
+        return Objects.equals(id, that.id) && Objects.equals(stagesEntity, that.stagesEntity) && Objects.equals(genderDisciplinesEntity, that.genderDisciplinesEntity) && Objects.equals(venuesEntity, that.venuesEntity) && Objects.equals(gamesEntity, that.gamesEntity) && Objects.equals(eventsCompetitorsEntity, that.eventsCompetitorsEntity) && Objects.equals(utcEventTime, that.utcEventTime) && Objects.equals(isFinished, that.isFinished);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, stagesEntity, genderDisciplinesEntity, venuesEntity, gamesEntity, eventsCompetitorsEntity, utcEventTime, isFinished);
+    }
 }

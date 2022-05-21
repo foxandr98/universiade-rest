@@ -3,11 +3,13 @@ package net.foxandr.sport.universiade.restapi.competitions.games;
 import net.foxandr.sport.universiade.restapi.competitions.games.gamesDTO.GameDTO;
 import net.foxandr.sport.universiade.restapi.competitions.games.gamesDTO.GameDTOList;
 import net.foxandr.sport.universiade.restapi.competitions.games.gamesDTO.GameDTOProjection;
+import net.foxandr.sport.universiade.restapi.competitions.games.gamesDTO.GameEventsProjection;
 import net.foxandr.sport.universiade.restapi.competitions.participants.ParticipantsEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
@@ -36,18 +38,19 @@ public class GamesEntityController {
     }
 
     @GetMapping("/gameso")
-    public List<GameDTOProjection> getGamesObjectsByLocale(String locale){
+    public Set<GameEventsProjection> getGamesObjectsByLocale(){
         try{
-//            return gamesEntityService.findGamesEntitiesByLocale(locale).stream()
-//                    .map(x -> new GamesEntityInfoDTO(x, x.getGamesTEntities().get(0)))
-//                    .collect(Collectors.toList());
-            var a = gamesEntityService.findGamesObjectsByLocale(locale);
-            return a;
+            return gamesEntityService.findAllGamesEventsProjections();
         } catch (Exception ex) {
             return null;
         }
 
     }
+
+
+
+
+
 
 
 //    @GetMapping("/gamestest")

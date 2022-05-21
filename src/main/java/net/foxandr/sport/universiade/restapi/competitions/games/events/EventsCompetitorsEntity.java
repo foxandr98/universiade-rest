@@ -2,6 +2,7 @@ package net.foxandr.sport.universiade.restapi.competitions.games.events;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import net.foxandr.sport.universiade.restapi.competitions.games.events.results.ResultTypesEntity;
 
 import javax.persistence.*;
@@ -24,6 +25,7 @@ public class EventsCompetitorsEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "result_type_id")
+    @JsonManagedReference
     private ResultTypesEntity resultTypesEntity;
 
     public EventsCompetitorsEntityPK getId() {
