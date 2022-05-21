@@ -32,7 +32,7 @@ public class CountriesEntity {
     @JsonBackReference
     private Set<GamesEntity> gamesEntities;
 
-    @OneToMany(mappedBy = "countriesEntities")
+    @OneToMany(mappedBy = "countriesEntity", fetch = FetchType.LAZY)
     @JsonBackReference
     private Set<UniversitiesEntity> universitiesEntities;
 
