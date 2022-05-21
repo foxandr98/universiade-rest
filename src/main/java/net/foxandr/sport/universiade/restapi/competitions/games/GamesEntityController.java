@@ -2,6 +2,7 @@ package net.foxandr.sport.universiade.restapi.competitions.games;
 
 import net.foxandr.sport.universiade.restapi.competitions.games.events.EventsDTOProjection;
 import net.foxandr.sport.universiade.restapi.competitions.games.events.gender_disciplines.disciplines.sports.SportsDTOProjection;
+import net.foxandr.sport.universiade.restapi.competitions.participants.ParticipantsEntity;
 import net.foxandr.sport.universiade.restapi.competitions.venues.VenuesDTOProjection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -61,10 +62,12 @@ public class GamesEntityController {
         return gamesEntityService.findDistinctSportsByLocaleAndGameId(locale, gameId);
     }
 
-//    @GetMapping("/games/{id}/participants")
-//    public List<GamesEntity> findParticipantsEntitiesByGameIdAndLocale(@PathVariable("id") Long id, String locale){
-//        return gamesEntityService.findParticipantsEntitiesByGameIdAndLocale(id, locale);
-//    }
+
+    @GetMapping("/games/{id}/participants")
+    public Set<ParticipantsEntity> findParticipantsEntitiesByGameIdAndLocale(@PathVariable("id") Long id,
+                                                                             String locale){
+        return gamesEntityService.findAllParticipantsByLocaleAndId(locale, id);
+    }
 
 
 }

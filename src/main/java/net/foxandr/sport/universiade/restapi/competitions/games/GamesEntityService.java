@@ -4,6 +4,8 @@ import net.foxandr.sport.universiade.restapi.competitions.games.events.EventsDTO
 import net.foxandr.sport.universiade.restapi.competitions.games.events.EventsEntityRepository;
 import net.foxandr.sport.universiade.restapi.competitions.games.events.gender_disciplines.disciplines.sports.SportsDTOProjection;
 import net.foxandr.sport.universiade.restapi.competitions.games.events.gender_disciplines.disciplines.sports.SportsEntityRepository;
+import net.foxandr.sport.universiade.restapi.competitions.participants.ParticipantsEntity;
+import net.foxandr.sport.universiade.restapi.competitions.participants.ParticipantsEntityRepository;
 import net.foxandr.sport.universiade.restapi.competitions.venues.VenuesDTOProjection;
 import net.foxandr.sport.universiade.restapi.competitions.venues.VenuesEntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,15 +23,19 @@ public class GamesEntityService {
 
     SportsEntityRepository sportsEntityRepository;
 
+    ParticipantsEntityRepository participantsEntityRepository;
+
     @Autowired
     public GamesEntityService(GamesEntityRepository gamesEntityRepository,
                               VenuesEntityRepository venuesEntityRepository,
                               EventsEntityRepository eventsEntityRepository,
-                              SportsEntityRepository sportsEntityRepository) {
+                              SportsEntityRepository sportsEntityRepository,
+                              ParticipantsEntityRepository participantsEntityRepository) {
         this.gamesEntityRepository = gamesEntityRepository;
         this.venuesEntityRepository = venuesEntityRepository;
         this.eventsEntityRepository = eventsEntityRepository;
         this.sportsEntityRepository = sportsEntityRepository;
+        this.participantsEntityRepository = participantsEntityRepository;
     }
 
 
@@ -56,5 +62,16 @@ public class GamesEntityService {
     public List<SportsDTOProjection> findDistinctSportsByLocaleAndGameId(String locale, Long id){
         return sportsEntityRepository.findDistinctSportsByLocaleAndGameId(locale, id);
     }
+
+
+//    public Set<GamesParticipantsDTO> findAllParticipantsByLocaleAndId(String locale, Long id){
+//        return gamesEntityRepository.findAllParticipantsByLocaleAndId(locale, id);
+//    }
+
+        public Set<ParticipantsEntity> findAllParticipantsByLocaleAndId(String locale, Long id){
+        return participantsEntityRepository.findAllParticipantsByLocaleAndId(locale, id);
+    }
+
+
 
 }
