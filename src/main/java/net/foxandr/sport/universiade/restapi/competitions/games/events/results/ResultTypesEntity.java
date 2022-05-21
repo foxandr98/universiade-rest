@@ -51,4 +51,20 @@ public class ResultTypesEntity {
     public int hashCode() {
         return Objects.hash(id, isWin);
     }
+
+    public Set<ResultTypesTEntity> getResultTypesTEntities() {
+        return resultTypesTEntities;
+    }
+
+    public void setResultTypesTEntities(Set<ResultTypesTEntity> resultTypesTEntities) {
+        this.resultTypesTEntities = resultTypesTEntities;
+    }
+
+    public Boolean getWin() {
+        return isWin;
+    }
+
+    public void setWin(Boolean win) {
+        isWin = win;
+    }
 }

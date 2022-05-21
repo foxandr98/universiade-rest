@@ -1,5 +1,7 @@
 package net.foxandr.sport.universiade.restapi.competitions.games.events.results;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -8,6 +10,7 @@ import java.util.Objects;
 public class ResultTypesTEntity {
 
     @EmbeddedId
+    @JsonIgnore
     private ResultTypesTEntityPK id;
 
     @Column(name = "name")

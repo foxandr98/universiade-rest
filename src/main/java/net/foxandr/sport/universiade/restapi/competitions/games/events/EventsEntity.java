@@ -1,6 +1,7 @@
 package net.foxandr.sport.universiade.restapi.competitions.games.events;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import net.foxandr.sport.universiade.restapi.competitions.games.GamesEntity;
 import net.foxandr.sport.universiade.restapi.competitions.games.events.gender_disciplines.GenderDisciplinesEntity;
@@ -8,9 +9,7 @@ import net.foxandr.sport.universiade.restapi.competitions.games.events.stages.St
 import net.foxandr.sport.universiade.restapi.competitions.venues.VenuesEntity;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.time.Instant;
-import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -23,26 +22,26 @@ public class EventsEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "stage_id")
-    @JsonBackReference
+    @JsonManagedReference
     private StagesEntity stagesEntity;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "gender_discipline_id")
-    @JsonBackReference
+    @JsonManagedReference
     private GenderDisciplinesEntity genderDisciplinesEntity;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "venue_id")
-    @JsonBackReference
+    @JsonManagedReference
     private VenuesEntity venuesEntity;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "game_id")
     @JsonBackReference
     private GamesEntity gamesEntity;
-
+//
     @OneToMany(mappedBy = "id.eventsEntity", fetch = FetchType.LAZY)
-    @JsonManagedReference
+    @JsonIgnore
     private Set<EventsCompetitorsEntity> eventsCompetitorsEntity;
 
 
@@ -83,15 +82,15 @@ public class EventsEntity {
     public void setVenuesEntity(VenuesEntity venuesEntity) {
         this.venuesEntity = venuesEntity;
     }
-
-    public GamesEntity getGamesEntity() {
-        return gamesEntity;
-    }
-
-    public void setGamesEntity(GamesEntity gamesEntity) {
-        this.gamesEntity = gamesEntity;
-    }
-
+//
+//    public GamesEntity getGamesEntity() {
+//        return gamesEntity;
+//    }
+//
+//    public void setGamesEntity(GamesEntity gamesEntity) {
+//        this.gamesEntity = gamesEntity;
+//    }
+//
     public Set<EventsCompetitorsEntity> getEventsCompetitorsEntity() {
         return eventsCompetitorsEntity;
     }
@@ -116,16 +115,16 @@ public class EventsEntity {
         isFinished = finished;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        EventsEntity that = (EventsEntity) o;
-        return Objects.equals(id, that.id) && Objects.equals(stagesEntity, that.stagesEntity) && Objects.equals(genderDisciplinesEntity, that.genderDisciplinesEntity) && Objects.equals(venuesEntity, that.venuesEntity) && Objects.equals(gamesEntity, that.gamesEntity) && Objects.equals(eventsCompetitorsEntity, that.eventsCompetitorsEntity) && Objects.equals(utcEventTime, that.utcEventTime) && Objects.equals(isFinished, that.isFinished);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, stagesEntity, genderDisciplinesEntity, venuesEntity, gamesEntity, eventsCompetitorsEntity, utcEventTime, isFinished);
-    }
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        EventsEntity that = (EventsEntity) o;
+//        return Objects.equals(id, that.id) && Objects.equals(stagesEntity, that.stagesEntity) && Objects.equals(genderDisciplinesEntity, that.genderDisciplinesEntity) && Objects.equals(venuesEntity, that.venuesEntity) && Objects.equals(gamesEntity, that.gamesEntity) && Objects.equals(eventsCompetitorsEntity, that.eventsCompetitorsEntity) && Objects.equals(utcEventTime, that.utcEventTime) && Objects.equals(isFinished, that.isFinished);
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(id, stagesEntity, genderDisciplinesEntity, venuesEntity, gamesEntity, eventsCompetitorsEntity, utcEventTime, isFinished);
+//    }
 }

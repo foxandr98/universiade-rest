@@ -7,7 +7,6 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "disciplines_t", schema = "universiade")
-
 public class DisciplinesTEntity {
 
     @EmbeddedId

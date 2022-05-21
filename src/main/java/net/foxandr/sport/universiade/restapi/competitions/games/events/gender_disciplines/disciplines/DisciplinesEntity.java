@@ -3,11 +3,10 @@ package net.foxandr.sport.universiade.restapi.competitions.games.events.gender_d
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import net.foxandr.sport.universiade.restapi.competitions.games.events.gender_disciplines.GenderDisciplinesEntity;
 import net.foxandr.sport.universiade.restapi.competitions.games.events.gender_disciplines.disciplines.sports.SportsEntity;
+import net.foxandr.sport.universiade.restapi.competitions.games.events.gender_disciplines.GenderDisciplinesEntity;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -18,7 +17,7 @@ public class DisciplinesEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
-    private Short id;
+    private Long id;
 
     @Column(name = "discipline_code")
     private String disciplineCode;
@@ -28,21 +27,25 @@ public class DisciplinesEntity {
     @JsonManagedReference
     private SportsEntity sportsEntity;
 
+    @OneToMany(mappedBy = "id.disciplinesEntity")
+    @JsonManagedReference
+    private Set<DisciplinesTEntity> disciplinesTEntities;
+
     @Column(name = "score_type")
     private String scoreType;
 
     @Column(name = "is_individual")
     private Boolean isIndividual;
 
-    @OneToMany(mappedBy = "disciplinesEntity")
+    @OneToMany(mappedBy = "disciplinesEntity", fetch = FetchType.LAZY)
     @JsonBackReference
     private Set<GenderDisciplinesEntity> genderDisciplinesEntities;
 
-    public Short getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Short id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -91,5 +94,21 @@ public class DisciplinesEntity {
 
     public void setGenderDisciplinesEntities(Set<GenderDisciplinesEntity> genderDisciplinesEntities) {
         this.genderDisciplinesEntities = genderDisciplinesEntities;
+    }
+
+    public Set<DisciplinesTEntity> getDisciplinesTEntities() {
+        return disciplinesTEntities;
+    }
+
+    public void setDisciplinesTEntities(Set<DisciplinesTEntity> disciplinesTEntities) {
+        this.disciplinesTEntities = disciplinesTEntities;
+    }
+
+    public SportsEntity getSportsEntity() {
+        return sportsEntity;
+    }
+
+    public void setSportsEntity(SportsEntity sportsEntity) {
+        this.sportsEntity = sportsEntity;
     }
 }

@@ -1,18 +1,11 @@
 package net.foxandr.sport.universiade.restapi.competitions.games;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import net.foxandr.sport.universiade.restapi.competitions.countries.CountriesEntity;
 import net.foxandr.sport.universiade.restapi.competitions.games.events.EventsEntity;
-import net.foxandr.sport.universiade.restapi.competitions.participants.ParticipantsEntity;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-import org.hibernate.annotations.IndexColumn;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 

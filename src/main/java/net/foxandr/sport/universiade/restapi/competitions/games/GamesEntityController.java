@@ -1,16 +1,10 @@
 package net.foxandr.sport.universiade.restapi.competitions.games;
 
-import net.foxandr.sport.universiade.restapi.competitions.games.gamesDTO.GameDTO;
-import net.foxandr.sport.universiade.restapi.competitions.games.gamesDTO.GameDTOList;
-import net.foxandr.sport.universiade.restapi.competitions.games.gamesDTO.GameDTOProjection;
-import net.foxandr.sport.universiade.restapi.competitions.games.gamesDTO.GameEventsProjection;
-import net.foxandr.sport.universiade.restapi.competitions.participants.ParticipantsEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -24,27 +18,21 @@ public class GamesEntityController {
     }
 
     @GetMapping("/games")
-    public List<GamesEntity> getGamesByLocale(String locale){
+    public List<GamesDTOProjection> getGamesByLocale(String locale){
         try{
-//            return gamesEntityService.findGamesEntitiesByLocale(locale).stream()
-//                    .map(x -> new GamesEntityInfoDTO(x, x.getGamesTEntities().get(0)))
-//                    .collect(Collectors.toList());
-            var a = gamesEntityService.findGamesEntitiesByLocale(locale);
-            return a;
+            return gamesEntityService.findShortGamesInfoByLocale(locale);
         } catch (Exception ex) {
             return null;
         }
-
     }
 
     @GetMapping("/gameso")
-    public Set<GameEventsProjection> getGamesObjectsByLocale(){
+    public Set<GamesEntity> getGamesObjectsByLocale(String locale, Long id){
         try{
-            return gamesEntityService.findAllGamesEventsProjections();
+            return gamesEntityService.findFullGamesInfoByLocaleAndId(locale, id);
         } catch (Exception ex) {
             return null;
         }
-
     }
 
 

@@ -2,7 +2,6 @@ package net.foxandr.sport.universiade.restapi.competitions.games.events.gender_d
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import net.foxandr.sport.universiade.restapi.competitions.games.events.gender_disciplines.disciplines.DisciplinesEntity;
 
 import javax.persistence.*;
@@ -21,11 +20,10 @@ public class SportsEntity {
     @Column(name = "sport_code")
     private String sportCode;
 
-    @OneToMany(mappedBy = "id.sportsEntity")
-    @JsonManagedReference
+    @OneToMany(mappedBy = "id.sportsEntity", fetch = FetchType.LAZY)
     private Set<SportsTEntity> sportsTEntities;
 
-    @OneToMany(mappedBy = "sportsEntity")
+    @OneToMany(mappedBy = "sportsEntity", fetch = FetchType.LAZY)
     @JsonBackReference
     private Set<DisciplinesEntity> disciplinesEntities;
 
@@ -53,24 +51,25 @@ public class SportsEntity {
         this.sportsTEntities = sportsTEntities;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        SportsEntity that = (SportsEntity) o;
-        return Objects.equals(id, that.id) && Objects.equals(sportCode, that.sportCode) && Objects.equals(sportsTEntities, that.sportsTEntities);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, sportCode, sportsTEntities);
-    }
-
     public Set<DisciplinesEntity> getDisciplinesEntities() {
         return disciplinesEntities;
     }
 
     public void setDisciplinesEntities(Set<DisciplinesEntity> disciplinesEntities) {
         this.disciplinesEntities = disciplinesEntities;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SportsEntity that = (SportsEntity) o;
+        return Objects.equals(id, that.id) && Objects.equals(sportCode, that.sportCode);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, sportCode);
     }
 }

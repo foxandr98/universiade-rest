@@ -1,6 +1,5 @@
 package net.foxandr.sport.universiade.restapi.competitions.venues;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;

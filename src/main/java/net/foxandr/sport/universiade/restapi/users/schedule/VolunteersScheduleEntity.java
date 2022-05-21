@@ -1,7 +1,6 @@
 package net.foxandr.sport.universiade.restapi.users.schedule;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import net.foxandr.sport.universiade.restapi.competitions.venues.VenuesEntity;
 import net.foxandr.sport.universiade.restapi.users.users.UsersEntity;

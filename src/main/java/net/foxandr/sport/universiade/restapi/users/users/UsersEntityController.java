@@ -1,6 +1,5 @@
 package net.foxandr.sport.universiade.restapi.users.users;
 
-import net.foxandr.sport.universiade.restapi.exceptions.AnonymousRoleException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.CurrentSecurityContext;
