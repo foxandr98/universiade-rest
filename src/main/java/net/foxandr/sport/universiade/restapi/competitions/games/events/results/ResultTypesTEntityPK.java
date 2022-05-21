@@ -1,4 +1,4 @@
-package net.foxandr.sport.universiade.restapi.competitions.games.events.gender_disciplines.disciplines;
+package net.foxandr.sport.universiade.restapi.competitions.games.events.results;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -7,21 +7,22 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Embeddable
-public class DisciplinesTEntityPK implements Serializable {
+public class ResultTypesTEntityPK implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id")
     @JsonBackReference
-    private DisciplinesEntity disciplinesEntity;
+    private ResultTypesEntity resultTypesEntity;
+
     @Column(name = "locale")
     private String locale;
 
-    public DisciplinesEntity getDisciplinesEntity() {
-        return disciplinesEntity;
+    public ResultTypesEntity getResultTypesEntity() {
+        return resultTypesEntity;
     }
 
-    public void setDisciplinesEntity(DisciplinesEntity disciplinesEntity) {
-        this.disciplinesEntity = disciplinesEntity;
+    public void setResultTypesEntity(ResultTypesEntity resultTypesEntity) {
+        this.resultTypesEntity = resultTypesEntity;
     }
 
     public String getLocale() {
@@ -36,12 +37,12 @@ public class DisciplinesTEntityPK implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        DisciplinesTEntityPK that = (DisciplinesTEntityPK) o;
-        return Objects.equals(disciplinesEntity, that.disciplinesEntity) && Objects.equals(locale, that.locale);
+        ResultTypesTEntityPK that = (ResultTypesTEntityPK) o;
+        return Objects.equals(resultTypesEntity, that.resultTypesEntity) && Objects.equals(locale, that.locale);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(disciplinesEntity, locale);
+        return Objects.hash(resultTypesEntity, locale);
     }
 }

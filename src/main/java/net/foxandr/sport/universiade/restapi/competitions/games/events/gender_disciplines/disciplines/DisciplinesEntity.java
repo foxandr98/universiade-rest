@@ -4,11 +4,12 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import net.foxandr.sport.universiade.restapi.competitions.games.events.gender_disciplines.GenderDisciplinesEntity;
-import net.foxandr.sport.universiade.restapi.competitions.games.events.gender_disciplines.sports.SportsEntity;
+import net.foxandr.sport.universiade.restapi.competitions.games.events.gender_disciplines.disciplines.sports.SportsEntity;
 
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "disciplines", schema = "universiade")
@@ -33,9 +34,9 @@ public class DisciplinesEntity {
     @Column(name = "is_individual")
     private Boolean isIndividual;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "disciplinesEntity")
     @JsonBackReference
-    private List<GenderDisciplinesEntity> genderDisciplinesEntities;
+    private Set<GenderDisciplinesEntity> genderDisciplinesEntities;
 
     public Short getId() {
         return id;
@@ -84,11 +85,11 @@ public class DisciplinesEntity {
         return Objects.hash(id, disciplineCode, sportsEntity, scoreType, isIndividual);
     }
 
-    public List<GenderDisciplinesEntity> getGenderDisciplinesEntities() {
+    public Set<GenderDisciplinesEntity> getGenderDisciplinesEntities() {
         return genderDisciplinesEntities;
     }
 
-    public void setGenderDisciplinesEntities(List<GenderDisciplinesEntity> genderDisciplinesEntities) {
+    public void setGenderDisciplinesEntities(Set<GenderDisciplinesEntity> genderDisciplinesEntities) {
         this.genderDisciplinesEntities = genderDisciplinesEntities;
     }
 }

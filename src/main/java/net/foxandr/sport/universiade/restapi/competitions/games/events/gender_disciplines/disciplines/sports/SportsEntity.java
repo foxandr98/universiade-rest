@@ -1,7 +1,9 @@
-package net.foxandr.sport.universiade.restapi.competitions.games.events.gender_disciplines.sports;
+package net.foxandr.sport.universiade.restapi.competitions.games.events.gender_disciplines.disciplines.sports;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import net.foxandr.sport.universiade.restapi.competitions.games.events.gender_disciplines.disciplines.DisciplinesEntity;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -22,6 +24,10 @@ public class SportsEntity {
     @OneToMany(mappedBy = "id.sportsEntity")
     @JsonManagedReference
     private Set<SportsTEntity> sportsTEntities;
+
+    @OneToMany(mappedBy = "sportsEntity")
+    @JsonBackReference
+    private Set<DisciplinesEntity> disciplinesEntities;
 
     public Long getId() {
         return id;
@@ -58,5 +64,13 @@ public class SportsEntity {
     @Override
     public int hashCode() {
         return Objects.hash(id, sportCode, sportsTEntities);
+    }
+
+    public Set<DisciplinesEntity> getDisciplinesEntities() {
+        return disciplinesEntities;
+    }
+
+    public void setDisciplinesEntities(Set<DisciplinesEntity> disciplinesEntities) {
+        this.disciplinesEntities = disciplinesEntities;
     }
 }

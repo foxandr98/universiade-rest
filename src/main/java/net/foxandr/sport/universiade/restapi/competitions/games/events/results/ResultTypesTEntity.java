@@ -1,26 +1,24 @@
-package net.foxandr.sport.universiade.restapi.competitions.games.events.gender_disciplines.sports;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+package net.foxandr.sport.universiade.restapi.competitions.games.events.results;
 
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "sports_t", schema = "universiade")
-public class SportsTEntity {
+@Table(name = "result_types_t", schema = "universiade")
+public class ResultTypesTEntity {
 
     @EmbeddedId
-    @JsonIgnore
-    private SportsTEntityPK id;
+    private ResultTypesTEntityPK id;
 
     @Column(name = "name")
     private String name;
 
-    public SportsTEntityPK getId() {
+
+    public ResultTypesTEntityPK getId() {
         return id;
     }
 
-    public void setId(SportsTEntityPK id) {
+    public void setId(ResultTypesTEntityPK id) {
         this.id = id;
     }
 
@@ -36,7 +34,7 @@ public class SportsTEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        SportsTEntity that = (SportsTEntity) o;
+        ResultTypesTEntity that = (ResultTypesTEntity) o;
         return Objects.equals(id, that.id) && Objects.equals(name, that.name);
     }
 
