@@ -14,7 +14,8 @@ public interface GamesEntityRepository extends JpaRepository<GamesEntity, Long> 
             "JOIN g.gamesTEntities gt " +
             "JOIN g.countriesEntity c " +
             "JOIN c.countriesTEntities ct " +
-            "WHERE gt.id.locale = :locale AND ct.id.locale = :locale")
+            "WHERE gt.id.locale = :locale AND ct.id.locale = :locale " +
+            "ORDER BY id DESC")
     List<GamesDTOProjection> findShortGamesInfoByLocale(String locale);
 
 

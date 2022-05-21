@@ -1,7 +1,9 @@
 package net.foxandr.sport.universiade.restapi.competitions.venues;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import net.foxandr.sport.universiade.restapi.competitions.games.events.EventsEntity;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -28,6 +30,10 @@ public class VenuesEntity {
     @OneToMany(mappedBy = "id.venuesEntity")
     @JsonManagedReference
     private Set<VenuesTEntity> venuesTEntities;
+
+    @OneToMany(mappedBy = "venuesEntity", fetch = FetchType.LAZY)
+    @JsonBackReference
+    private Set<EventsEntity> eventsEntities;
 
     public Long getId() {
         return id;
@@ -80,5 +86,14 @@ public class VenuesEntity {
 
     public void setVenuesTEntities(Set<VenuesTEntity> venuesTEntities) {
         this.venuesTEntities = venuesTEntities;
+    }
+
+
+    public Set<EventsEntity> getEventsEntities() {
+        return eventsEntities;
+    }
+
+    public void setEventsEntities(Set<EventsEntity> eventsEntities) {
+        this.eventsEntities = eventsEntities;
     }
 }
