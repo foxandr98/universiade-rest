@@ -3,6 +3,7 @@ package net.foxandr.sport.universiade.restapi.competitions.games;
 import net.foxandr.sport.universiade.restapi.competitions.games.events.EventsCompetitorsEntity;
 import net.foxandr.sport.universiade.restapi.competitions.games.events.EventsDTOProjection;
 import net.foxandr.sport.universiade.restapi.competitions.games.events.gender_disciplines.disciplines.sports.SportsDTOProjection;
+import net.foxandr.sport.universiade.restapi.competitions.games.medals.MedalsSummaryEntity;
 import net.foxandr.sport.universiade.restapi.competitions.participants.ParticipantsEntity;
 import net.foxandr.sport.universiade.restapi.competitions.venues.VenuesDTOProjection;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,6 +81,11 @@ public class GamesEntityController {
 
 
 
+    @GetMapping("/games/{id}/medals")
+    public List<MedalsSummaryEntity> getMedalsSummaryByLocaleAndGameId(@PathVariable("id") Long id,
+                                                                 String locale){
+        return gamesEntityService.getMedalsSummaryByLocaleAndGameId(locale, id);
+    }
 
 
 }
