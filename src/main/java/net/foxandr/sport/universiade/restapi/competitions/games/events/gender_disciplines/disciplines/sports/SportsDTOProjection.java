@@ -4,5 +4,6 @@ public interface SportsDTOProjection {
 
     Long getSportId();
     String getSportName();
+    String getSportCode();
 
 }

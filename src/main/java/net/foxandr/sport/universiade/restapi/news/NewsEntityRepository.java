@@ -11,6 +11,7 @@ public interface NewsEntityRepository extends JpaRepository<NewsEntity, Long> {
             "JOIN FETCH n.newsTEntities nt " +
             "JOIN FETCH n.imagesEntity i " +
             "JOIN FETCH i.imageCategoriesEntity ic " +
-            "WHERE nt.id.locale = :locale")
+            "WHERE nt.id.locale = :locale " +
+            "ORDER BY n.createdOn DESC ")
     List<NewsEntity> getAllByNewsTEntitiesLocale(String locale);
 }

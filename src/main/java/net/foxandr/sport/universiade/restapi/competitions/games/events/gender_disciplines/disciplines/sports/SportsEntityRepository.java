@@ -8,7 +8,7 @@ import java.util.List;
 public interface SportsEntityRepository extends JpaRepository<SportsEntity, Long> {
 
 
-    @Query("SELECT DISTINCT sp.id as sportId, spt.name as sportName " +
+    @Query("SELECT DISTINCT sp.id as sportId, spt.name as sportName, sp.sportCode as sportCode " +
             "FROM GamesEntity g " +
             "JOIN g.eventsEntities e " +
             "JOIN e.genderDisciplinesEntity gd " +
