@@ -16,7 +16,8 @@ public interface SportsEntityRepository extends JpaRepository<SportsEntity, Long
             "JOIN d.sportsEntity sp " +
             "JOIN sp.sportsTEntities spt " +
             "WHERE spt.id.locale = :locale " +
-            "AND g.id = :id")
+            "AND g.id = :id " +
+            "ORDER BY sp.id")
     List<SportsDTOProjection> findDistinctSportsByLocaleAndGameId(String locale, Long id);
 
 

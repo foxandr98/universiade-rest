@@ -80,4 +80,6 @@ public interface GamesEntityRepository extends JpaRepository<GamesEntity, Long> 
             "AND g.id = :id")
     Set<GamesEntity> findFullGamesInfoByLocaleAndId(String locale, Long id);
 
+
+
 }
