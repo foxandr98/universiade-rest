@@ -13,8 +13,8 @@ public class DisciplinesTEntity {
     @JsonIgnore
     private DisciplinesTEntityPK id;
 
-    @Column(name = "category_name")
-    private String categoryName;
+    @Column(name = "name")
+    private String name;
 
     public DisciplinesTEntityPK getId() {
         return id;
@@ -24,12 +24,12 @@ public class DisciplinesTEntity {
         this.id = id;
     }
 
-    public String getCategoryName() {
-        return categoryName;
+    public String getName() {
+        return name;
     }
 
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
@@ -37,11 +37,11 @@ public class DisciplinesTEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DisciplinesTEntity that = (DisciplinesTEntity) o;
-        return Objects.equals(id, that.id) && Objects.equals(categoryName, that.categoryName);
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, categoryName);
+        return Objects.hash(id, name);
     }
 }

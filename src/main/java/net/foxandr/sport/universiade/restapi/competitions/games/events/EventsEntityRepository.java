@@ -10,7 +10,7 @@ import java.util.List;
 public interface EventsEntityRepository extends JpaRepository<EventsEntity, Long> {
 
     @Query("SELECT e.id as id, stt.name as stageName, v.id as venueId,  " +
-            "dt.categoryName as disciplineName, d.isIndividual as isIndividual, gd.genderType as genderType, " +
+            "dt.name as disciplineName, d.isIndividual as isIndividual, gd.genderType as genderType, " +
             "e.utcEventTime as utcEventTime, e.isFinished as isFinished " +
             "FROM EventsEntity e " +
             "JOIN e.gamesEntity g " +
