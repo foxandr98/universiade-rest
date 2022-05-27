@@ -24,4 +24,23 @@ public interface EventsEntityRepository extends JpaRepository<EventsEntity, Long
             "AND g.id = :id")
     List<EventsDTOProjection> findAllEventsByLocaleAndGameId(String locale, Long id);
 
+
+    @Query("SELECT e " +
+            "FROM EventsEntity e " +
+            "JOIN FETCH e.gamesEntity g " +
+            "JOIN FETCH e.venuesEntity v " +
+            "JOIN FETCH v.venuesTEntities vt " +
+            "JOIN FETCH e.stagesEntity st " +
+            "JOIN FETCH st.stagesTEntities stt " +
+            "JOIN FETCH e.genderDisciplinesEntity gd " +
+            "JOIN FETCH gd.disciplinesEntity d " +
+            "JOIN FETCH d.disciplinesTEntities dt " +
+            "JOIN FETCH d.sportsEntity sp " +
+            "JOIN FETCH sp.sportsTEntities spt " +
+            "WHERE stt.id.locale = :locale AND dt.id.locale = :locale " +
+            "AND spt.id.locale = :locale AND vt.id.locale = :locale " +
+            "AND g.id = :gameId AND d.sportsEntity.id = :sportId")
+    List<EventsEntity> findAllEventsByLocaleAndGameIdAndSportId(String locale, Long gameId, Long sportId);
+
+
 }
