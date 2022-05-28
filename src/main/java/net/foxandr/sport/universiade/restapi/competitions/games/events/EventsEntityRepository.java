@@ -39,7 +39,8 @@ public interface EventsEntityRepository extends JpaRepository<EventsEntity, Long
             "JOIN FETCH sp.sportsTEntities spt " +
             "WHERE stt.id.locale = :locale AND dt.id.locale = :locale " +
             "AND spt.id.locale = :locale AND vt.id.locale = :locale " +
-            "AND g.id = :gameId AND d.sportsEntity.id = :sportId")
+            "AND g.id = :gameId AND d.sportsEntity.id = :sportId " +
+            "ORDER BY e.utcEventTime DESC")
     List<EventsEntity> findAllEventsByLocaleAndGameIdAndSportId(String locale, Long gameId, Long sportId);
 
 

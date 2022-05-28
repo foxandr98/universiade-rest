@@ -31,7 +31,8 @@ public class ImageEntityService {
             BufferedImage image = ImageIO.read(is);
             ByteArrayOutputStream bao = new ByteArrayOutputStream();
             ImageIO.write(image, extension, bao);
-            return Base64.encodeBase64(bao.toByteArray());
+//            return Base64.encodeBase64(bao.toByteArray());
+            return bao.toByteArray();
         } catch (Exception ex) {
             System.out.println("Error while downloading Image");
             return null;
