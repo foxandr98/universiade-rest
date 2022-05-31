@@ -21,7 +21,7 @@ public class VolunteersScheduleEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "venue_id")
     @JsonManagedReference
-    private VenuesEntity venueEntity;
+    private VenuesEntity venuesEntity;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
@@ -31,8 +31,8 @@ public class VolunteersScheduleEntity {
     @Column(name = "utc_help_time")
     private Instant utcHelpTime;
 
-    @Column(name = "to_do_list")
-    private String toDoList;
+    @Column(name = "extra_info")
+    private String extraInfo;
 
     public Long getId() {
         return id;
@@ -42,12 +42,12 @@ public class VolunteersScheduleEntity {
         this.id = id;
     }
 
-    public VenuesEntity getVenueEntity() {
-        return venueEntity;
+    public VenuesEntity getVenuesEntity() {
+        return venuesEntity;
     }
 
-    public void setVenueEntity(VenuesEntity venueEntity) {
-        this.venueEntity = venueEntity;
+    public void setVenuesEntity(VenuesEntity venuesEntity) {
+        this.venuesEntity = venuesEntity;
     }
 
     public Instant getUtcHelpTime() {
@@ -58,12 +58,12 @@ public class VolunteersScheduleEntity {
         this.utcHelpTime = utcHelpTime;
     }
 
-    public String getToDoList() {
-        return toDoList;
+    public String getExtraInfo() {
+        return extraInfo;
     }
 
-    public void setToDoList(String toDoList) {
-        this.toDoList = toDoList;
+    public void setExtraInfo(String extraInfo) {
+        this.extraInfo = extraInfo;
     }
 
     @Override
@@ -71,12 +71,12 @@ public class VolunteersScheduleEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         VolunteersScheduleEntity that = (VolunteersScheduleEntity) o;
-        return Objects.equals(id, that.id) && Objects.equals(venueEntity, that.venueEntity) && Objects.equals(utcHelpTime, that.utcHelpTime) && Objects.equals(toDoList, that.toDoList);
+        return Objects.equals(id, that.id) && Objects.equals(venuesEntity, that.venuesEntity) && Objects.equals(utcHelpTime, that.utcHelpTime) && Objects.equals(extraInfo, that.extraInfo);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, venueEntity, utcHelpTime, toDoList);
+        return Objects.hash(id, venuesEntity, utcHelpTime, extraInfo);
     }
 
     public UsersEntity getUsersEntity() {

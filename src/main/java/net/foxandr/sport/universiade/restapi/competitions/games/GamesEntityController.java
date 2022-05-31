@@ -35,7 +35,7 @@ public class GamesEntityController {
     }
 
     @GetMapping("/games/{id}")
-    public Set<GamesEntity> getGamesObjectsByLocale(String locale,
+    public GamesEntity getGamesObjectsByLocale(String locale,
                                                     @PathVariable(name = "id") Long id){
         try{
             return gamesEntityService.findFullGamesInfoByLocaleAndId(locale, id);
@@ -50,21 +50,6 @@ public class GamesEntityController {
                                                                  @PathVariable(name="id") Long gameId){
         return gamesEntityService.findDistinctVenuesByLocaleAndGameId(locale, gameId);
     }
-
-    @GetMapping("/games/{id}/events")
-    public List<EventsDTOProjection> findAllEventsByLocaleAndGameId(String locale,
-                                                                    @PathVariable(name="id") Long gameId)
-    {
-        return gamesEntityService.findAllEventsByLocaleAndGameId(locale, gameId);
-    }
-
-    @GetMapping("/games/{gameId}/events/{eventId}")
-    public Set<EventsCompetitorsEntity> findCompetitorsResultsByLocaleAndEventId(@PathVariable("gameId") Long gameId,
-                                                                                 @PathVariable("eventId") Long eventId,
-                                                                                 String locale){
-        return gamesEntityService.findCompetitorsResultsByLocaleAndEventId(locale, gameId, eventId);
-    }
-
 
     @GetMapping("/games/{id}/sports")
     public List<SportsDTOProjection> findDistinctSportsByLocaleAndGameId(String locale,
@@ -81,11 +66,18 @@ public class GamesEntityController {
     }
 
 
-
     @GetMapping("/games/{id}/medals")
     public List<MedalsSummaryEntity> getMedalsSummaryByLocaleAndGameId(@PathVariable("id") Long id,
                                                                  String locale){
         return gamesEntityService.getMedalsSummaryByLocaleAndGameId(locale, id);
+    }
+
+
+    @GetMapping("/games/{id}/events")
+    public List<EventsDTOProjection> findAllEventsByLocaleAndGameId(String locale,
+                                                                    @PathVariable(name="id") Long gameId)
+    {
+        return gamesEntityService.findAllEventsByLocaleAndGameId(locale, gameId);
     }
 
     @GetMapping("/games/{gameId}/sports/{sportId}/events")
@@ -93,6 +85,13 @@ public class GamesEntityController {
                                                                 @PathVariable("sportId") Long sportId,
                                                                 String locale){
         return gamesEntityService.findAllEventsByLocaleAndGameIdAndSportId(locale, gameId, sportId);
+    }
+
+    @GetMapping("/games/{gameId}/events/{eventId}/results")
+    public Set<EventsCompetitorsEntity> findCompetitorsResultsByLocaleAndEventId(@PathVariable("gameId") Long gameId,
+                                                                                 @PathVariable("eventId") Long eventId,
+                                                                                 String locale){
+        return gamesEntityService.findCompetitorsResultsByLocaleAndEventId(locale, gameId, eventId);
     }
 
 

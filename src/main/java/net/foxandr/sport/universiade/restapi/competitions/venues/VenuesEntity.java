@@ -20,10 +20,10 @@ public class VenuesEntity {
     private Long id;
 
     @Column(name = "longitude")
-    private BigDecimal longitude;
+    private Double longitude;
 
     @Column(name = "latitude")
-    private BigDecimal latitude;
+    private Double latitude;
 
     @Column(name = "for_competitions")
     private Boolean forCompetitions;
@@ -43,19 +43,19 @@ public class VenuesEntity {
         this.id = id;
     }
 
-    public BigDecimal getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(BigDecimal longitude) {
+    public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
 
-    public BigDecimal getLatitude() {
+    public Double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(BigDecimal latitude) {
+    public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
 

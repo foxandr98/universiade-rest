@@ -49,7 +49,7 @@ public class GamesEntityService {
     }
 
 
-    public Set<GamesEntity> findFullGamesInfoByLocaleAndId(String locale, Long id) {
+    public GamesEntity findFullGamesInfoByLocaleAndId(String locale, Long id) {
         return gamesEntityRepository.findFullGamesInfoByLocaleAndId(locale, id);
     }
 

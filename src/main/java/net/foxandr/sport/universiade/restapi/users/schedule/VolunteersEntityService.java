@@ -13,7 +13,7 @@ public class VolunteersEntityService {
         this.volunteersScheduleRepository = volunteersScheduleRepository;
     }
 
-    public List<VolunteersScheduleEntity> findAllSchedulesByUserName(String userName, String locale){
-        return volunteersScheduleRepository.findAllSchedulesByUserName(userName, locale);
+    public List<VolunteersScheduleEntity> findAllSchedulesByUserName(String userName){
+        return volunteersScheduleRepository.findAllSchedulesByUserName(userName);
     }
 }
