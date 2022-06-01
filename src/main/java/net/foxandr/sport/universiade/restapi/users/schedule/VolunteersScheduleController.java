@@ -20,9 +20,9 @@ public class VolunteersScheduleController {
         this.volunteersEntityService = volunteersEntityService;
     }
 
-    @GetMapping("/schedule/{userName}")
+    @GetMapping("{userName}/schedule")
     public List<VolunteersScheduleEntity> getScheduleByUsername(
-            @PathVariable(name = "userName") String userName){
+            @PathVariable(name = "userName") String userName) {
         return volunteersEntityService.findAllSchedulesByUserName(userName);
     }
 }
