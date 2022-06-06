@@ -1,6 +1,7 @@
 package net.foxandr.sport.universiade.restapi.lostfound;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
@@ -21,5 +22,7 @@ public interface LostFoundItemsEntityRepository extends JpaRepository<LostFoundI
             "WHERE l.isRequest = :isRequest AND l.isFound = :isFound")
     List<LostFoundItemsEntity> findAllByIsRequestAndIsFound(boolean isRequest, boolean isFound);
 
-
+    @Modifying
+    @Query("UPDATE LostFoundItemsEntity lf SET lf.isFound = :isFound WHERE lf.id = :itemId")
+    int updateItemAndSetIsFound(Long itemId, boolean isFound);
 }

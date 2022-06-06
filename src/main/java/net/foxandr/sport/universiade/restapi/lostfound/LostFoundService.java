@@ -35,6 +35,12 @@ public class LostFoundService {
         return lostFoundItemsEntityRepository.findAll();
     }
 
+    public int updateLostFoundItem(Long itemId, boolean isFound) {
+        return lostFoundItemsEntityRepository.updateItemAndSetIsFound(itemId ,isFound);
+    }
+
+
+
     public LostFoundItemsEntity createLostFoundItem(LostFoundItemsDTO lostFoundDTO, MultipartFile image) {
         try {
             var generatedLostFoundItem = saveImageAndGetLostFoundEntity(lostFoundDTO, image);
@@ -49,7 +55,10 @@ public class LostFoundService {
     private LostFoundItemsEntity saveImageAndGetLostFoundEntity(LostFoundItemsDTO lostFoundDTO,
                                                                 MultipartFile image) {
         UUID uuid = UUID.randomUUID();
-        Path path = Paths.get("/images/lost-found/" + uuid + image.getOriginalFilename());
+        String categoryPath = lostFoundDTO.getIsRequest()
+                ? "/images/lost-found-requests/"
+                : "/images/lost-found-detected/";
+        Path path = Paths.get(categoryPath + uuid + image.getOriginalFilename());
         Instant date = Instant.now();
 
         LostFoundItemsEntity lostFoundItemsEntity = new LostFoundItemsEntity(
